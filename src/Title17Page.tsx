@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import toc from "@/data/title17-toc.json";
-import sections from "@/data/title17-sections.json";
+import toc from "./data/title17-toc.json";
+import sections from "./data/title17-sections.json";
 
 export default function Title17Page() {
   const [activeSection, setActiveSection] = useState("106");
