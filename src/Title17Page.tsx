@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Input } from "@/components/ui/input";
 import toc from "@/data/title17-toc.json";
 import sections from "@/data/title17-sections.json";
 
@@ -16,13 +14,14 @@ export default function Title17Page() {
     <div className="flex min-h-screen">
       <aside className="w-64 border-r p-4 bg-white">
         <h2 className="text-xl font-semibold mb-2">Table of Contents</h2>
-        <Input
+        <input
+          type="text"
           placeholder="Search TOC..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="mb-3"
+          className="mb-3 w-full border px-2 py-1 rounded"
         />
-        <ScrollArea className="h-[85vh]">
+        <div className="h-[85vh] overflow-y-auto">
           <ul className="space-y-2">
             {filteredTOC.map((entry) => (
               <li key={entry.section_number}>
@@ -37,7 +36,7 @@ export default function Title17Page() {
               </li>
             ))}
           </ul>
-        </ScrollArea>
+        </div>
       </aside>
       <main className="flex-1 p-6">
         {sectionData ? (
