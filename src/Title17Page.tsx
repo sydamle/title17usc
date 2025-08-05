@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
 import toc from "@/data/title17-toc.json";
@@ -42,24 +41,22 @@ export default function Title17Page() {
       </aside>
       <main className="flex-1 p-6">
         {sectionData ? (
-          <Card>
-            <CardContent className="prose max-w-none">
-              <h1 id={`§${sectionData.section_number}`}>
-                § {sectionData.section_number} — {sectionData.title}
-              </h1>
-              {sectionData.paragraphs.map((p, i) => (
-                <p key={i} id={`§${sectionData.section_number}.${i + 1}`}>
-                  <a
-                    href={`#§${sectionData.section_number}.${i + 1}`}
-                    className="text-blue-600 hover:underline text-sm"
-                  >
-                    ¶ {i + 1}
-                  </a>{" "}
-                  {p}
-                </p>
-              ))}
-            </CardContent>
-          </Card>
+          <div className="bg-white rounded-xl shadow p-6">
+            <h1 id={`§${sectionData.section_number}`} className="text-2xl font-bold mb-4">
+              § {sectionData.section_number} — {sectionData.title}
+            </h1>
+            {sectionData.paragraphs.map((p, i) => (
+              <p key={i} id={`§${sectionData.section_number}.${i + 1}`} className="mb-4">
+                <a
+                  href={`#§${sectionData.section_number}.${i + 1}`}
+                  className="text-blue-600 hover:underline text-sm"
+                >
+                  ¶ {i + 1}
+                </a>{" "}
+                {p}
+              </p>
+            ))}
+          </div>
         ) : (
           <p>Section not found.</p>
         )}
