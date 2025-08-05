@@ -1,0 +1,622 @@
+[
+  {
+    "section_number": "\u00a7\u202f101.",
+    "title": "Definitions"
+  },
+  {
+    "section_number": "\u00a7\u202f102.",
+    "title": "Subject matter of copyright: In general"
+  },
+  {
+    "section_number": "\u00a7\u202f103.",
+    "title": "Subject matter of copyright: Compilations and derivative works"
+  },
+  {
+    "section_number": "\u00a7\u202f104.",
+    "title": "Subject matter of copyright: National origin"
+  },
+  {
+    "section_number": "\u00a7\u202f104A.",
+    "title": "Copyright in restored works"
+  },
+  {
+    "section_number": "\u00a7\u202f105.",
+    "title": "Subject matter of copyright: United States Government works"
+  },
+  {
+    "section_number": "\u00a7\u202f106.",
+    "title": "Exclusive rights in copyrighted works"
+  },
+  {
+    "section_number": "\u00a7\u202f106A.",
+    "title": "Rights of certain authors to attribution and integrity"
+  },
+  {
+    "section_number": "\u00a7\u202f107.",
+    "title": "Limitations on exclusive rights: Fair use"
+  },
+  {
+    "section_number": "\u00a7\u202f108.",
+    "title": "Limitations on exclusive rights: Reproduction by libraries and archives"
+  },
+  {
+    "section_number": "\u00a7\u202f109.",
+    "title": "Limitations on exclusive rights: Effect of transfer of particular copy or phonorecord"
+  },
+  {
+    "section_number": "\u00a7\u202f110.",
+    "title": "Limitations on exclusive rights: Exemption of certain performances and displays"
+  },
+  {
+    "section_number": "\u00a7\u202f111.",
+    "title": "Limitations on exclusive rights: Secondary transmissions of broadcast programming by cable"
+  },
+  {
+    "section_number": "\u00a7\u202f112.",
+    "title": "Limitations on exclusive rights: Ephemeral recordings"
+  },
+  {
+    "section_number": "\u00a7\u202f113.",
+    "title": "Scope of exclusive rights in pictorial, graphic, and sculptural works"
+  },
+  {
+    "section_number": "\u00a7\u202f114.",
+    "title": "Scope of exclusive rights in sound recordings"
+  },
+  {
+    "section_number": "\u00a7\u202f115.",
+    "title": "Scope of exclusive rights in nondramatic musical works: Compulsory license for making and distributing phonorecords"
+  },
+  {
+    "section_number": "\u00a7\u202f116.",
+    "title": "Negotiated licenses for public performances by means of coin-operated phonorecord players"
+  },
+  {
+    "section_number": "[\u00a7\u202f116A.",
+    "title": "Renumbered \u00a7\u202f116]"
+  },
+  {
+    "section_number": "\u00a7\u202f117.",
+    "title": "Limitations on exclusive rights: Computer programs"
+  },
+  {
+    "section_number": "\u00a7\u202f118.",
+    "title": "Scope of exclusive rights: Use of certain works in connection with noncommercial broadcasting"
+  },
+  {
+    "section_number": "\u00a7\u202f119.",
+    "title": "Limitations on exclusive rights: Secondary transmissions of distant television programming by satellite"
+  },
+  {
+    "section_number": "\u00a7\u202f120.",
+    "title": "Scope of exclusive rights in architectural works"
+  },
+  {
+    "section_number": "\u00a7\u202f121.",
+    "title": "Limitations on exclusive rights: Reproduction for blind or other people with disabilities"
+  },
+  {
+    "section_number": "\u00a7\u202f121A.",
+    "title": "Limitations on exclusive rights: reproduction for blind or other people with disabilities in Marrakesh Treaty countries"
+  },
+  {
+    "section_number": "\u00a7\u202f122.",
+    "title": "Limitations on exclusive rights: Secondary transmissions of local television programming by satellite"
+  },
+  {
+    "section_number": "\u00a7\u202f201.",
+    "title": "Ownership of copyright"
+  },
+  {
+    "section_number": "\u00a7\u202f202.",
+    "title": "Ownership of copyright as distinct from ownership of material object"
+  },
+  {
+    "section_number": "\u00a7\u202f203.",
+    "title": "Termination of transfers and licenses granted by the author"
+  },
+  {
+    "section_number": "\u00a7\u202f204.",
+    "title": "Execution of transfers of copyright ownership"
+  },
+  {
+    "section_number": "\u00a7\u202f205.",
+    "title": "Recordation of transfers and other documents"
+  },
+  {
+    "section_number": "\u00a7\u202f301.",
+    "title": "Preemption with respect to other laws"
+  },
+  {
+    "section_number": "\u00a7\u202f302.",
+    "title": "Duration of copyright: Works created on or after"
+  },
+  {
+    "section_number": "\u00a7\u202f303.",
+    "title": "Duration of copyright: Works created but not published or copyrighted before"
+  },
+  {
+    "section_number": "\u00a7\u202f304.",
+    "title": "Duration of copyright: Subsisting copyrights"
+  },
+  {
+    "section_number": "\u00a7\u202f305.",
+    "title": "Duration of copyright: Terminal date"
+  },
+  {
+    "section_number": "\u00a7\u202f401.",
+    "title": "Notice of copyright: Visually perceptible copies"
+  },
+  {
+    "section_number": "\u00a7\u202f402.",
+    "title": "Notice of copyright: Phonorecords of sound recordings"
+  },
+  {
+    "section_number": "\u00a7\u202f403.",
+    "title": "Notice of copyright: Publications incorporating United States Government works"
+  },
+  {
+    "section_number": "\u00a7\u202f404.",
+    "title": "Notice of copyright: Contributions to collective works"
+  },
+  {
+    "section_number": "\u00a7\u202f405.",
+    "title": "Notice of copyright: Omission of notice on certain copies and phonorecords"
+  },
+  {
+    "section_number": "\u00a7\u202f406.",
+    "title": "Notice of copyright: Error in name or date on certain copies and phonorecords"
+  },
+  {
+    "section_number": "\u00a7\u202f407.",
+    "title": "Deposit of copies or phonorecords for Library of Congress"
+  },
+  {
+    "section_number": "\u00a7\u202f408.",
+    "title": "Copyright registration in general"
+  },
+  {
+    "section_number": "\u00a7\u202f409.",
+    "title": "Application for copyright registration"
+  },
+  {
+    "section_number": "\u00a7\u202f410.",
+    "title": "Registration of claim and issuance of certificate"
+  },
+  {
+    "section_number": "\u00a7\u202f411.",
+    "title": "Registration and civil infringement actions"
+  },
+  {
+    "section_number": "\u00a7\u202f412.",
+    "title": "Registration as prerequisite to certain remedies for infringement"
+  },
+  {
+    "section_number": "\u00a7\u202f501.",
+    "title": "Infringement of copyright"
+  },
+  {
+    "section_number": "\u00a7\u202f502.",
+    "title": "Remedies for infringement: Injunctions"
+  },
+  {
+    "section_number": "\u00a7\u202f503.",
+    "title": "Remedies for infringement: Impounding and disposition of infringing articles"
+  },
+  {
+    "section_number": "\u00a7\u202f504.",
+    "title": "Remedies for infringement: Damages and profits"
+  },
+  {
+    "section_number": "\u00a7\u202f505.",
+    "title": "Remedies for infringement: Costs and attorney\u2019s fees"
+  },
+  {
+    "section_number": "\u00a7\u202f506.",
+    "title": "Criminal offenses"
+  },
+  {
+    "section_number": "\u00a7\u202f507.",
+    "title": "Limitations on actions"
+  },
+  {
+    "section_number": "\u00a7\u202f508.",
+    "title": "Notification of filing and determination of actions"
+  },
+  {
+    "section_number": "[\u00a7\u202f509.",
+    "title": "Repealed."
+  },
+  {
+    "section_number": "\u00a7\u202f510.",
+    "title": "Remedies for alteration of programming by cable systems"
+  },
+  {
+    "section_number": "\u00a7\u202f511.",
+    "title": "Liability of States, instrumentalities of States, and State officials for infringement of copyright"
+  },
+  {
+    "section_number": "\u00a7\u202f512.",
+    "title": "Limitations on liability relating to material online"
+  },
+  {
+    "section_number": "\u00a7\u202f513.",
+    "title": "Determination of reasonable license fees for individual proprietors"
+  },
+  {
+    "section_number": "[\u00a7\u202f601.",
+    "title": "Repealed."
+  },
+  {
+    "section_number": "\u00a7\u202f602.",
+    "title": "Infringing importation or exportation of copies or phonorecords"
+  },
+  {
+    "section_number": "\u00a7\u202f603.",
+    "title": "Importation prohibitions: Enforcement and disposition of excluded articles"
+  },
+  {
+    "section_number": "\u00a7\u202f701.",
+    "title": "The Copyright Office: General responsibilities and organization"
+  },
+  {
+    "section_number": "\u00a7\u202f702.",
+    "title": "Copyright Office regulations"
+  },
+  {
+    "section_number": "\u00a7\u202f703.",
+    "title": "Effective date of actions in Copyright Office"
+  },
+  {
+    "section_number": "\u00a7\u202f704.",
+    "title": "Retention and disposition of articles deposited in Copyright Office"
+  },
+  {
+    "section_number": "\u00a7\u202f705.",
+    "title": "Copyright Office records: Preparation, maintenance, public inspection, and searching"
+  },
+  {
+    "section_number": "\u00a7\u202f706.",
+    "title": "Copies of Copyright Office records"
+  },
+  {
+    "section_number": "\u00a7\u202f707.",
+    "title": "Copyright Office forms and publications"
+  },
+  {
+    "section_number": "\u00a7\u202f708.",
+    "title": "Copyright Office fees"
+  },
+  {
+    "section_number": "\u00a7\u202f709.",
+    "title": "Delay in delivery caused by disruption of postal or other services"
+  },
+  {
+    "section_number": "\u00a7\u202f710.",
+    "title": "Emergency relief authority"
+  },
+  {
+    "section_number": "\u00a7\u202f801.",
+    "title": "Copyright Royalty Judges; appointment and functions"
+  },
+  {
+    "section_number": "\u00a7\u202f802.",
+    "title": "Copyright Royalty Judgeships; staff"
+  },
+  {
+    "section_number": "\u00a7\u202f803.",
+    "title": "Proceedings of Copyright Royalty Judges"
+  },
+  {
+    "section_number": "\u00a7\u202f804.",
+    "title": "Institution of proceedings"
+  },
+  {
+    "section_number": "\u00a7\u202f805.",
+    "title": "General rule for voluntarily negotiated agreements"
+  },
+  {
+    "section_number": "\u00a7\u202f901.",
+    "title": "Definitions"
+  },
+  {
+    "section_number": "\u00a7\u202f902.",
+    "title": "Subject matter of protection"
+  },
+  {
+    "section_number": "\u00a7\u202f903.",
+    "title": "Ownership, transfer, licensing, and recordation"
+  },
+  {
+    "section_number": "\u00a7\u202f904.",
+    "title": "Duration of protection"
+  },
+  {
+    "section_number": "\u00a7\u202f905.",
+    "title": "Exclusive rights in mask works"
+  },
+  {
+    "section_number": "\u00a7\u202f906.",
+    "title": "Limitation on exclusive rights: reverse engineering; first sale"
+  },
+  {
+    "section_number": "\u00a7\u202f907.",
+    "title": "Limitation on exclusive rights: innocent infringement"
+  },
+  {
+    "section_number": "\u00a7\u202f908.",
+    "title": "Registration of claims of protection"
+  },
+  {
+    "section_number": "\u00a7\u202f909.",
+    "title": "Mask work notice"
+  },
+  {
+    "section_number": "\u00a7\u202f910.",
+    "title": "Enforcement of exclusive rights"
+  },
+  {
+    "section_number": "\u00a7\u202f911.",
+    "title": "Civil actions"
+  },
+  {
+    "section_number": "\u00a7\u202f912.",
+    "title": "Relation to other laws"
+  },
+  {
+    "section_number": "\u00a7\u202f913.",
+    "title": "Transitional provisions"
+  },
+  {
+    "section_number": "\u00a7\u202f914.",
+    "title": "International transitional provisions"
+  },
+  {
+    "section_number": "\u00a7\u202f1001.",
+    "title": "Definitions"
+  },
+  {
+    "section_number": "\u00a7\u202f1002.",
+    "title": "Incorporation of copying controls"
+  },
+  {
+    "section_number": "\u00a7\u202f1003.",
+    "title": "Obligation to make royalty payments"
+  },
+  {
+    "section_number": "\u00a7\u202f1004.",
+    "title": "Royalty payments"
+  },
+  {
+    "section_number": "\u00a7\u202f1005.",
+    "title": "Deposit of royalty payments and deduction of expenses"
+  },
+  {
+    "section_number": "\u00a7\u202f1006.",
+    "title": "Entitlement to royalty payments"
+  },
+  {
+    "section_number": "\u00a7\u202f1007.",
+    "title": "Procedures for distributing royalty payments"
+  },
+  {
+    "section_number": "\u00a7\u202f1008.",
+    "title": "Prohibition on certain infringement actions"
+  },
+  {
+    "section_number": "\u00a7\u202f1009.",
+    "title": "Civil remedies"
+  },
+  {
+    "section_number": "\u00a7\u202f1010.",
+    "title": "Determination of certain disputes"
+  },
+  {
+    "section_number": "\u00a7\u202f1101.",
+    "title": "Unauthorized fixation and trafficking in sound recordings and music videos"
+  },
+  {
+    "section_number": "\u00a7\u202f1201.",
+    "title": "Circumvention of copyright protection systems"
+  },
+  {
+    "section_number": "\u201cSECTION 1.",
+    "title": "SHORT TITLE."
+  },
+  {
+    "section_number": "\u201cSEC. 2.",
+    "title": "REPEAL OF EXISTING RULE AND ADDITIONAL RULEMAKING BY LIBRARIAN OF CONGRESS."
+  },
+  {
+    "section_number": "\u00a7\u202f1202.",
+    "title": "Integrity of copyright management information"
+  },
+  {
+    "section_number": "\u00a7\u202f1203.",
+    "title": "Civil remedies"
+  },
+  {
+    "section_number": "\u00a7\u202f1204.",
+    "title": "Criminal offenses and penalties"
+  },
+  {
+    "section_number": "\u00a7\u202f1205.",
+    "title": "Savings clause"
+  },
+  {
+    "section_number": "\u00a7\u202f1301.",
+    "title": "Designs protected"
+  },
+  {
+    "section_number": "\u00a7\u202f1302.",
+    "title": "Designs not subject to protection"
+  },
+  {
+    "section_number": "\u00a7\u202f1303.",
+    "title": "Revisions, adaptations, and rearrangements"
+  },
+  {
+    "section_number": "\u00a7\u202f1304.",
+    "title": "Commencement of protection"
+  },
+  {
+    "section_number": "\u00a7\u202f1305.",
+    "title": "Term of protection"
+  },
+  {
+    "section_number": "\u00a7\u202f1306.",
+    "title": "Design notice"
+  },
+  {
+    "section_number": "\u00a7\u202f1307.",
+    "title": "Effect of omission of notice"
+  },
+  {
+    "section_number": "\u00a7\u202f1308.",
+    "title": "Exclusive rights"
+  },
+  {
+    "section_number": "\u00a7\u202f1309.",
+    "title": "Infringement"
+  },
+  {
+    "section_number": "\u00a7\u202f1310.",
+    "title": "Application for registration"
+  },
+  {
+    "section_number": "\u00a7\u202f1311.",
+    "title": "Benefit of earlier filing date in foreign country"
+  },
+  {
+    "section_number": "\u00a7\u202f1312.",
+    "title": "Oaths and acknowledgments"
+  },
+  {
+    "section_number": "\u00a7\u202f1313.",
+    "title": "Examination of application and issue or refusal of registration"
+  },
+  {
+    "section_number": "\u00a7\u202f1314.",
+    "title": "Certification of registration"
+  },
+  {
+    "section_number": "\u00a7\u202f1315.",
+    "title": "Publication of announcements and indexes"
+  },
+  {
+    "section_number": "\u00a7\u202f1316.",
+    "title": "Fees"
+  },
+  {
+    "section_number": "\u00a7\u202f1317.",
+    "title": "Regulations"
+  },
+  {
+    "section_number": "\u00a7\u202f1318.",
+    "title": "Copies of records"
+  },
+  {
+    "section_number": "\u00a7\u202f1319.",
+    "title": "Correction of errors in certificates"
+  },
+  {
+    "section_number": "\u00a7\u202f1320.",
+    "title": "Ownership and transfer"
+  },
+  {
+    "section_number": "\u00a7\u202f1321.",
+    "title": "Remedy for infringement"
+  },
+  {
+    "section_number": "\u00a7\u202f1322.",
+    "title": "Injunctions"
+  },
+  {
+    "section_number": "\u00a7\u202f1323.",
+    "title": "Recovery for infringement"
+  },
+  {
+    "section_number": "\u00a7\u202f1324.",
+    "title": "Power of court over registration"
+  },
+  {
+    "section_number": "\u00a7\u202f1325.",
+    "title": "Liability for action on registration fraudulently obtained"
+  },
+  {
+    "section_number": "\u00a7\u202f1326.",
+    "title": "Penalty for false marking"
+  },
+  {
+    "section_number": "\u00a7\u202f1327.",
+    "title": "Penalty for false representation"
+  },
+  {
+    "section_number": "\u00a7\u202f1328.",
+    "title": "Enforcement by Treasury and Postal Service"
+  },
+  {
+    "section_number": "\u00a7\u202f1329.",
+    "title": "Relation to design patent law"
+  },
+  {
+    "section_number": "\u00a7\u202f1330.",
+    "title": "Common law and other rights unaffected"
+  },
+  {
+    "section_number": "\u00a7\u202f1331.",
+    "title": "Administrator; Office of the Administrator"
+  },
+  {
+    "section_number": "\u00a7\u202f1332.",
+    "title": "No retroactive effect"
+  },
+  {
+    "section_number": "\u00a7\u202f1401.",
+    "title": "Unauthorized use of pre-1972 sound recordings"
+  },
+  {
+    "section_number": "\u00a7\u202f1501.",
+    "title": "Definitions"
+  },
+  {
+    "section_number": "\u00a7\u202f1502.",
+    "title": "Copyright Claims Board"
+  },
+  {
+    "section_number": "\u00a7\u202f1503.",
+    "title": "Authority and duties of the Copyright Claims Board"
+  },
+  {
+    "section_number": "\u00a7\u202f1504.",
+    "title": "Nature of proceedings"
+  },
+  {
+    "section_number": "\u00a7\u202f1505.",
+    "title": "Registration requirement"
+  },
+  {
+    "section_number": "\u00a7\u202f1506.",
+    "title": "Conduct of proceedings"
+  },
+  {
+    "section_number": "\u00a7\u202f1507.",
+    "title": "Effect of proceeding"
+  },
+  {
+    "section_number": "\u00a7\u202f1508.",
+    "title": "Review and confirmation by district court"
+  },
+  {
+    "section_number": "\u00a7\u202f1509.",
+    "title": "Relationship to other district court actions"
+  },
+  {
+    "section_number": "\u00a7\u202f1510.",
+    "title": "Implementation by Copyright Office"
+  },
+  {
+    "section_number": "\u00a7\u202f1511.",
+    "title": "Funding"
+  }
+]
