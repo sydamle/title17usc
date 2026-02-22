@@ -487,7 +487,7 @@ function ChapterView({
 // ======== Section View ========
 
 // Sections that have paragraph tools enabled
-const PARA_TOOLS_SECTIONS = new Set(['701']);
+const PARA_TOOLS_SECTIONS = new Set(['115', '701']);
 
 function SectionView({
   sectionNum,
