@@ -730,9 +730,9 @@ function SectionView({
                               : setActivePopup({ id: popupId, url, citation })
                           }
                           aria-expanded={isActive}
-                          title={`Paragraph tools for "${def.term}"`}
+                          title={`Paragraph tools for \u201c${def.term}\u201d`}
                         >
-                          {def.term}
+                          {'\u201c'}{def.term}{'\u201d'}
                         </button>
                         <span dangerouslySetInnerHTML={{ __html: split.after }} />
                       </p>
