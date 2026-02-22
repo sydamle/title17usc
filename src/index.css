@@ -597,6 +597,132 @@ mark {
 .usc-block p.indent2 { padding-left: 56px; }
 .usc-block p.indent3 { padding-left: 84px; }
 
+/* ===== PARAGRAPH TOOLS ===== */
+
+/* The clickable paragraph designator badge, e.g. "(a)", "(1)" */
+.para-num-btn {
+  display: inline-block;
+  background: #e4eaf2;
+  border: 1px solid #b0bfd0;
+  border-radius: 3px;
+  padding: 0 5px;
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: 400;
+  cursor: pointer;
+  color: #1a1a1a;
+  line-height: 1.5;
+  margin-right: 3px;
+  vertical-align: baseline;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+}
+.para-num-btn:hover {
+  background: #ccdaec;
+  border-color: #005ea2;
+  color: #005ea2;
+}
+.para-num-btn.active {
+  background: #ccdaec;
+  border-color: #005ea2;
+  color: #005ea2;
+}
+
+/* Popup panel that appears below the clicked block */
+.para-popup {
+  background: #f0f5eb;
+  border: 1px solid #7a9e5c;
+  border-radius: 4px;
+  margin: 2px 0 10px 0;
+  font-family: 'Arial', sans-serif;
+  font-size: 13px;
+  max-width: 680px;
+}
+
+.para-popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #5a7a3a;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 3px 3px 0 0;
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.para-popup-close {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+  opacity: 0.85;
+  transition: opacity 0.1s;
+}
+.para-popup-close:hover {
+  opacity: 1;
+}
+
+.para-popup-body {
+  padding: 10px 14px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.para-popup-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.para-popup-label {
+  font-weight: 700;
+  font-size: 11px;
+  color: #3a5a1a;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+  min-width: 54px;
+}
+
+.para-popup-value {
+  flex: 1;
+  color: #005ea2;
+  font-size: 13px;
+  word-break: break-all;
+  min-width: 0;
+}
+
+.para-popup-copy-btn {
+  flex-shrink: 0;
+  background: #fff;
+  border: 1px solid #adadad;
+  border-radius: 3px;
+  padding: 2px 10px;
+  font-size: 12px;
+  font-family: 'Arial', sans-serif;
+  cursor: pointer;
+  color: #3d4551;
+  white-space: nowrap;
+  transition: background 0.1s, border-color 0.1s, color 0.1s;
+}
+.para-popup-copy-btn:hover {
+  background: #e8f0f8;
+  border-color: #005ea2;
+  color: #005ea2;
+}
+.para-popup-copy-btn.copied {
+  background: #e6f4ea;
+  border-color: #2e7d32;
+  color: #2e7d32;
+}
+
 /* Source credit */
 .source-credit {
   margin-top: 28px;
