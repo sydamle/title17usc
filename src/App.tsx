@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
-import { TocData, TocChapter, TocSection, SectionData, ContentBlock, SectionsMap } from './types';
+import { TocData, TocChapter, TocSection, SectionData, ContentBlock, SectionsMap, NoteBlock } from './types';
 import tocJsonImport from './data/toc.json';
 
 // TOC is small (32KB) — import directly for instant sidebar render
@@ -529,6 +529,74 @@ function ChapterView({
   );
 }
 
+// ======== Notes Panel ========
+
+const TOPIC_HEADING: Record<string, string> = {
+  historicalAndRevision: 'Historical and Revision Notes',
+  amendments: 'Amendments',
+  effectiveDateOfAmendment: 'Effective Date of Amendment',
+  editorialNotes: 'Editorial Notes',
+  statutoryNotes: 'Statutory Notes',
+  referencesInText: 'References in Text',
+  shortTitleOfAmendment: 'Short Title',
+  effectiveDate: 'Effective Date',
+  priorProvisions: 'Prior Provisions',
+  separability: 'Separability',
+  execDoc: 'Executive Document',
+  removalDescription: 'Removal Description',
+  definitions: 'Definitions',
+  savings: 'Savings Provisions',
+  constitutionality: 'Constitutionality',
+  codification: 'Codification',
+  executiveOrder: 'Executive Order',
+};
+
+function NotesPanel({ notes }: { notes: NoteBlock[] }) {
+  // Merge consecutive heading-only notes into the next note with content,
+  // so "Historical and Revision Notes" acts as a section header.
+  const rendered: { heading: string; isHeader: boolean; html: string }[] = [];
+  let pendingHeader = '';
+
+  for (const note of notes) {
+    const heading = note.heading || TOPIC_HEADING[note.topic] || '';
+    if (!note.html) {
+      // No body — treat as a section header label for the next note(s)
+      pendingHeader = heading;
+    } else {
+      rendered.push({
+        heading: pendingHeader || heading,
+        isHeader: !!pendingHeader,
+        html: note.html,
+      });
+      pendingHeader = '';
+    }
+  }
+  // If there's a pending header with no following body, still show it
+  if (pendingHeader) {
+    rendered.push({ heading: pendingHeader, isHeader: false, html: '' });
+  }
+
+  return (
+    <div className="notes-panel">
+      {rendered.map((item, i) => (
+        <div key={i} className="note-section">
+          {item.heading && (
+            <h3 className={`note-heading${item.isHeader ? ' note-heading-group' : ''}`}>
+              {item.heading}
+            </h3>
+          )}
+          {item.html && (
+            <div
+              className="note-body"
+              dangerouslySetInnerHTML={{ __html: item.html }}
+            />
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 // ======== Section View ========
 
 function SectionView({
@@ -542,10 +610,12 @@ function SectionView({
 }) {
   const sections = useSections();
   const [activePopup, setActivePopup] = useState<PopupState | null>(null);
+  const [activeTab, setActiveTab] = useState<'text' | 'notes'>('text');
 
-  // Reset popup when navigating to a different section
+  // Reset popup and tab when navigating to a different section
   useEffect(() => {
     setActivePopup(null);
+    setActiveTab('text');
   }, [sectionNum]);
 
   let chapter: TocChapter | undefined;
@@ -697,7 +767,32 @@ function SectionView({
           </h1>
         </div>
 
-        <div className="statutory-text">
+        <div className="section-tabs" role="tablist">
+          <button
+            role="tab"
+            aria-selected={activeTab === 'text'}
+            className={`section-tab${activeTab === 'text' ? ' active' : ''}`}
+            onClick={() => setActiveTab('text')}
+          >
+            Text
+          </button>
+          {section.notes.length > 0 && (
+            <button
+              role="tab"
+              aria-selected={activeTab === 'notes'}
+              className={`section-tab${activeTab === 'notes' ? ' active' : ''}`}
+              onClick={() => setActiveTab('notes')}
+            >
+              Notes
+            </button>
+          )}
+        </div>
+
+        {activeTab === 'notes' ? (
+          <NotesPanel notes={section.notes} />
+        ) : null}
+
+        <div className="statutory-text" hidden={activeTab === 'notes'}>
           {section.content.length === 0 ? (
             <p style={{ color: '#767676', fontStyle: 'italic' }}>
               [Repealed or text omitted]
