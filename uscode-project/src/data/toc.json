@@ -1,0 +1,1036 @@
+{
+  "releasePoint": "119-73not60",
+  "updated": "2026-01-23",
+  "titles": [
+    {
+      "number": "17",
+      "name": "Copyrights",
+      "identifier": "/us/usc/t17",
+      "chapters": [
+        {
+          "number": "1",
+          "heading": "SUBJECT MATTER AND SCOPE OF COPYRIGHT",
+          "identifier": "/us/usc/t17/ch1",
+          "sections": [
+            {
+              "number": "101",
+              "numText": "§ 101.",
+              "heading": "Definitions",
+              "identifier": "/us/usc/t17/s101"
+            },
+            {
+              "number": "102",
+              "numText": "§ 102.",
+              "heading": "Subject matter of copyright: In general",
+              "identifier": "/us/usc/t17/s102"
+            },
+            {
+              "number": "103",
+              "numText": "§ 103.",
+              "heading": "Subject matter of copyright: Compilations and derivative works",
+              "identifier": "/us/usc/t17/s103"
+            },
+            {
+              "number": "104",
+              "numText": "§ 104.",
+              "heading": "Subject matter of copyright: National origin",
+              "identifier": "/us/usc/t17/s104"
+            },
+            {
+              "number": "104A",
+              "numText": "§ 104A.",
+              "heading": "Copyright in restored works",
+              "identifier": "/us/usc/t17/s104A"
+            },
+            {
+              "number": "105",
+              "numText": "§ 105.",
+              "heading": "Subject matter of copyright: United States Government works",
+              "identifier": "/us/usc/t17/s105"
+            },
+            {
+              "number": "106",
+              "numText": "§ 106.",
+              "heading": "Exclusive rights in copyrighted works",
+              "identifier": "/us/usc/t17/s106"
+            },
+            {
+              "number": "106A",
+              "numText": "§ 106A.",
+              "heading": "Rights of certain authors to attribution and integrity",
+              "identifier": "/us/usc/t17/s106A"
+            },
+            {
+              "number": "107",
+              "numText": "§ 107.",
+              "heading": "Limitations on exclusive rights: Fair use",
+              "identifier": "/us/usc/t17/s107"
+            },
+            {
+              "number": "108",
+              "numText": "§ 108.",
+              "heading": "Limitations on exclusive rights: Reproduction by libraries and archives",
+              "identifier": "/us/usc/t17/s108"
+            },
+            {
+              "number": "109",
+              "numText": "§ 109.",
+              "heading": "Limitations on exclusive rights: Effect of transfer of particular copy or phonorecord",
+              "identifier": "/us/usc/t17/s109"
+            },
+            {
+              "number": "110",
+              "numText": "§ 110.",
+              "heading": "Limitations on exclusive rights: Exemption of certain performances and displays",
+              "identifier": "/us/usc/t17/s110"
+            },
+            {
+              "number": "111",
+              "numText": "§ 111.",
+              "heading": "Limitations on exclusive rights: Secondary transmissions of broadcast programming by cable",
+              "identifier": "/us/usc/t17/s111"
+            },
+            {
+              "number": "112",
+              "numText": "§ 112.",
+              "heading": "Limitations on exclusive rights: Ephemeral recordings",
+              "identifier": "/us/usc/t17/s112"
+            },
+            {
+              "number": "113",
+              "numText": "§ 113.",
+              "heading": "Scope of exclusive rights in pictorial, graphic, and sculptural works",
+              "identifier": "/us/usc/t17/s113"
+            },
+            {
+              "number": "114",
+              "numText": "§ 114.",
+              "heading": "Scope of exclusive rights in sound recordings",
+              "identifier": "/us/usc/t17/s114"
+            },
+            {
+              "number": "115",
+              "numText": "§ 115.",
+              "heading": "Scope of exclusive rights in nondramatic musical works: Compulsory license for making and distributing phonorecords",
+              "identifier": "/us/usc/t17/s115"
+            },
+            {
+              "number": "116",
+              "numText": "§ 116.",
+              "heading": "Negotiated licenses for public performances by means of coin-operated phonorecord players",
+              "identifier": "/us/usc/t17/s116"
+            },
+            {
+              "number": "116A",
+              "numText": "[§ 116A.",
+              "heading": "Renumbered § 116]",
+              "identifier": "/us/usc/t17/s116A"
+            },
+            {
+              "number": "117",
+              "numText": "§ 117.",
+              "heading": "Limitations on exclusive rights: Computer programs",
+              "identifier": "/us/usc/t17/s117"
+            },
+            {
+              "number": "118",
+              "numText": "§ 118.",
+              "heading": "Scope of exclusive rights: Use of certain works in connection with noncommercial broadcasting",
+              "identifier": "/us/usc/t17/s118"
+            },
+            {
+              "number": "119",
+              "numText": "§ 119.",
+              "heading": "Limitations on exclusive rights: Secondary transmissions of distant television programming by satellite",
+              "identifier": "/us/usc/t17/s119"
+            },
+            {
+              "number": "120",
+              "numText": "§ 120.",
+              "heading": "Scope of exclusive rights in architectural works",
+              "identifier": "/us/usc/t17/s120"
+            },
+            {
+              "number": "121",
+              "numText": "§ 121.",
+              "heading": "Limitations on exclusive rights: Reproduction for blind or other people with disabilities",
+              "identifier": "/us/usc/t17/s121"
+            },
+            {
+              "number": "121A",
+              "numText": "§ 121A.",
+              "heading": "Limitations on exclusive rights: reproduction for blind or other people with disabilities in Marrakesh Treaty countries",
+              "identifier": "/us/usc/t17/s121A"
+            },
+            {
+              "number": "122",
+              "numText": "§ 122.",
+              "heading": "Limitations on exclusive rights: Secondary transmissions of local television programming by satellite",
+              "identifier": "/us/usc/t17/s122"
+            }
+          ]
+        },
+        {
+          "number": "2",
+          "heading": "COPYRIGHT OWNERSHIP AND TRANSFER",
+          "identifier": "/us/usc/t17/ch2",
+          "sections": [
+            {
+              "number": "201",
+              "numText": "§ 201.",
+              "heading": "Ownership of copyright",
+              "identifier": "/us/usc/t17/s201"
+            },
+            {
+              "number": "202",
+              "numText": "§ 202.",
+              "heading": "Ownership of copyright as distinct from ownership of material object",
+              "identifier": "/us/usc/t17/s202"
+            },
+            {
+              "number": "203",
+              "numText": "§ 203.",
+              "heading": "Termination of transfers and licenses granted by the author",
+              "identifier": "/us/usc/t17/s203"
+            },
+            {
+              "number": "204",
+              "numText": "§ 204.",
+              "heading": "Execution of transfers of copyright ownership",
+              "identifier": "/us/usc/t17/s204"
+            },
+            {
+              "number": "205",
+              "numText": "§ 205.",
+              "heading": "Recordation of transfers and other documents",
+              "identifier": "/us/usc/t17/s205"
+            }
+          ]
+        },
+        {
+          "number": "3",
+          "heading": "DURATION OF COPYRIGHT",
+          "identifier": "/us/usc/t17/ch3",
+          "sections": [
+            {
+              "number": "301",
+              "numText": "§ 301.",
+              "heading": "Preemption with respect to other laws",
+              "identifier": "/us/usc/t17/s301"
+            },
+            {
+              "number": "302",
+              "numText": "§ 302.",
+              "heading": "Duration of copyright: Works created on or after January 1, 1978",
+              "identifier": "/us/usc/t17/s302"
+            },
+            {
+              "number": "303",
+              "numText": "§ 303.",
+              "heading": "Duration of copyright: Works created but not published or copyrighted before January 1, 1978",
+              "identifier": "/us/usc/t17/s303"
+            },
+            {
+              "number": "304",
+              "numText": "§ 304.",
+              "heading": "Duration of copyright: Subsisting copyrights",
+              "identifier": "/us/usc/t17/s304"
+            },
+            {
+              "number": "305",
+              "numText": "§ 305.",
+              "heading": "Duration of copyright: Terminal date",
+              "identifier": "/us/usc/t17/s305"
+            }
+          ]
+        },
+        {
+          "number": "4",
+          "heading": "COPYRIGHT NOTICE, DEPOSIT, AND REGISTRATION",
+          "identifier": "/us/usc/t17/ch4",
+          "sections": [
+            {
+              "number": "401",
+              "numText": "§ 401.",
+              "heading": "Notice of copyright: Visually perceptible copies",
+              "identifier": "/us/usc/t17/s401"
+            },
+            {
+              "number": "402",
+              "numText": "§ 402.",
+              "heading": "Notice of copyright: Phonorecords of sound recordings",
+              "identifier": "/us/usc/t17/s402"
+            },
+            {
+              "number": "403",
+              "numText": "§ 403.",
+              "heading": "Notice of copyright: Publications incorporating United States Government works",
+              "identifier": "/us/usc/t17/s403"
+            },
+            {
+              "number": "404",
+              "numText": "§ 404.",
+              "heading": "Notice of copyright: Contributions to collective works",
+              "identifier": "/us/usc/t17/s404"
+            },
+            {
+              "number": "405",
+              "numText": "§ 405.",
+              "heading": "Notice of copyright: Omission of notice on certain copies and phonorecords",
+              "identifier": "/us/usc/t17/s405"
+            },
+            {
+              "number": "406",
+              "numText": "§ 406.",
+              "heading": "Notice of copyright: Error in name or date on certain copies and phonorecords",
+              "identifier": "/us/usc/t17/s406"
+            },
+            {
+              "number": "407",
+              "numText": "§ 407.",
+              "heading": "Deposit of copies or phonorecords for Library of Congress",
+              "identifier": "/us/usc/t17/s407"
+            },
+            {
+              "number": "408",
+              "numText": "§ 408.",
+              "heading": "Copyright registration in general",
+              "identifier": "/us/usc/t17/s408"
+            },
+            {
+              "number": "409",
+              "numText": "§ 409.",
+              "heading": "Application for copyright registration",
+              "identifier": "/us/usc/t17/s409"
+            },
+            {
+              "number": "410",
+              "numText": "§ 410.",
+              "heading": "Registration of claim and issuance of certificate",
+              "identifier": "/us/usc/t17/s410"
+            },
+            {
+              "number": "411",
+              "numText": "§ 411.",
+              "heading": "Registration and civil infringement actions",
+              "identifier": "/us/usc/t17/s411"
+            },
+            {
+              "number": "412",
+              "numText": "§ 412.",
+              "heading": "Registration as prerequisite to certain remedies for infringement",
+              "identifier": "/us/usc/t17/s412"
+            }
+          ]
+        },
+        {
+          "number": "5",
+          "heading": "COPYRIGHT INFRINGEMENT AND REMEDIES",
+          "identifier": "/us/usc/t17/ch5",
+          "sections": [
+            {
+              "number": "501",
+              "numText": "§ 501.",
+              "heading": "Infringement of copyright",
+              "identifier": "/us/usc/t17/s501"
+            },
+            {
+              "number": "502",
+              "numText": "§ 502.",
+              "heading": "Remedies for infringement: Injunctions",
+              "identifier": "/us/usc/t17/s502"
+            },
+            {
+              "number": "503",
+              "numText": "§ 503.",
+              "heading": "Remedies for infringement: Impounding and disposition of infringing articles",
+              "identifier": "/us/usc/t17/s503"
+            },
+            {
+              "number": "504",
+              "numText": "§ 504.",
+              "heading": "Remedies for infringement: Damages and profits",
+              "identifier": "/us/usc/t17/s504"
+            },
+            {
+              "number": "505",
+              "numText": "§ 505.",
+              "heading": "Remedies for infringement: Costs and attorney’s fees",
+              "identifier": "/us/usc/t17/s505"
+            },
+            {
+              "number": "506",
+              "numText": "§ 506.",
+              "heading": "Criminal offenses",
+              "identifier": "/us/usc/t17/s506"
+            },
+            {
+              "number": "507",
+              "numText": "§ 507.",
+              "heading": "Limitations on actions",
+              "identifier": "/us/usc/t17/s507"
+            },
+            {
+              "number": "508",
+              "numText": "§ 508.",
+              "heading": "Notification of filing and determination of actions",
+              "identifier": "/us/usc/t17/s508"
+            },
+            {
+              "number": "509",
+              "numText": "[§ 509.",
+              "heading": "Repealed. Pub. L. 110–403, title II, § 201(b)(1), Oct. 13, 2008, 122 Stat. 4260]",
+              "identifier": "/us/usc/t17/s509"
+            },
+            {
+              "number": "510",
+              "numText": "§ 510.",
+              "heading": "Remedies for alteration of programming by cable systems",
+              "identifier": "/us/usc/t17/s510"
+            },
+            {
+              "number": "511",
+              "numText": "§ 511.",
+              "heading": "Liability of States, instrumentalities of States, and State officials for infringement of copyright",
+              "identifier": "/us/usc/t17/s511"
+            },
+            {
+              "number": "512",
+              "numText": "§ 512.",
+              "heading": "Limitations on liability relating to material online",
+              "identifier": "/us/usc/t17/s512"
+            },
+            {
+              "number": "513",
+              "numText": "§ 513.",
+              "heading": "Determination of reasonable license fees for individual proprietors",
+              "identifier": "/us/usc/t17/s513"
+            }
+          ]
+        },
+        {
+          "number": "6",
+          "heading": "IMPORTATION AND EXPORTATION",
+          "identifier": "/us/usc/t17/ch6",
+          "sections": [
+            {
+              "number": "601",
+              "numText": "[§ 601.",
+              "heading": "Repealed. Pub. L. 111–295, § 4(a), Dec. 9, 2010, 124 Stat. 3180]",
+              "identifier": "/us/usc/t17/s601"
+            },
+            {
+              "number": "602",
+              "numText": "§ 602.",
+              "heading": "Infringing importation or exportation of copies or phonorecords",
+              "identifier": "/us/usc/t17/s602"
+            },
+            {
+              "number": "603",
+              "numText": "§ 603.",
+              "heading": "Importation prohibitions: Enforcement and disposition of excluded articles",
+              "identifier": "/us/usc/t17/s603"
+            }
+          ]
+        },
+        {
+          "number": "7",
+          "heading": "COPYRIGHT OFFICE",
+          "identifier": "/us/usc/t17/ch7",
+          "sections": [
+            {
+              "number": "701",
+              "numText": "§ 701.",
+              "heading": "The Copyright Office: General responsibilities and organization",
+              "identifier": "/us/usc/t17/s701"
+            },
+            {
+              "number": "702",
+              "numText": "§ 702.",
+              "heading": "Copyright Office regulations",
+              "identifier": "/us/usc/t17/s702"
+            },
+            {
+              "number": "703",
+              "numText": "§ 703.",
+              "heading": "Effective date of actions in Copyright Office",
+              "identifier": "/us/usc/t17/s703"
+            },
+            {
+              "number": "704",
+              "numText": "§ 704.",
+              "heading": "Retention and disposition of articles deposited in Copyright Office",
+              "identifier": "/us/usc/t17/s704"
+            },
+            {
+              "number": "705",
+              "numText": "§ 705.",
+              "heading": "Copyright Office records: Preparation, maintenance, public inspection, and searching",
+              "identifier": "/us/usc/t17/s705"
+            },
+            {
+              "number": "706",
+              "numText": "§ 706.",
+              "heading": "Copies of Copyright Office records",
+              "identifier": "/us/usc/t17/s706"
+            },
+            {
+              "number": "707",
+              "numText": "§ 707.",
+              "heading": "Copyright Office forms and publications",
+              "identifier": "/us/usc/t17/s707"
+            },
+            {
+              "number": "708",
+              "numText": "§ 708.",
+              "heading": "Copyright Office fees",
+              "identifier": "/us/usc/t17/s708"
+            },
+            {
+              "number": "709",
+              "numText": "§ 709.",
+              "heading": "Delay in delivery caused by disruption of postal or other services",
+              "identifier": "/us/usc/t17/s709"
+            },
+            {
+              "number": "710",
+              "numText": "§ 710.",
+              "heading": "Emergency relief authority",
+              "identifier": "/us/usc/t17/s710"
+            }
+          ]
+        },
+        {
+          "number": "8",
+          "heading": "PROCEEDINGS BY COPYRIGHT ROYALTY JUDGES",
+          "identifier": "/us/usc/t17/ch8",
+          "sections": [
+            {
+              "number": "801",
+              "numText": "§ 801.",
+              "heading": "Copyright Royalty Judges; appointment and functions",
+              "identifier": "/us/usc/t17/s801"
+            },
+            {
+              "number": "802",
+              "numText": "§ 802.",
+              "heading": "Copyright Royalty Judgeships; staff",
+              "identifier": "/us/usc/t17/s802"
+            },
+            {
+              "number": "803",
+              "numText": "§ 803.",
+              "heading": "Proceedings of Copyright Royalty Judges",
+              "identifier": "/us/usc/t17/s803"
+            },
+            {
+              "number": "804",
+              "numText": "§ 804.",
+              "heading": "Institution of proceedings",
+              "identifier": "/us/usc/t17/s804"
+            },
+            {
+              "number": "805",
+              "numText": "§ 805.",
+              "heading": "General rule for voluntarily negotiated agreements",
+              "identifier": "/us/usc/t17/s805"
+            }
+          ]
+        },
+        {
+          "number": "9",
+          "heading": "PROTECTION OF SEMICONDUCTOR CHIP PRODUCTS",
+          "identifier": "/us/usc/t17/ch9",
+          "sections": [
+            {
+              "number": "901",
+              "numText": "§ 901.",
+              "heading": "Definitions",
+              "identifier": "/us/usc/t17/s901"
+            },
+            {
+              "number": "902",
+              "numText": "§ 902.",
+              "heading": "Subject matter of protection",
+              "identifier": "/us/usc/t17/s902"
+            },
+            {
+              "number": "903",
+              "numText": "§ 903.",
+              "heading": "Ownership, transfer, licensing, and recordation",
+              "identifier": "/us/usc/t17/s903"
+            },
+            {
+              "number": "904",
+              "numText": "§ 904.",
+              "heading": "Duration of protection",
+              "identifier": "/us/usc/t17/s904"
+            },
+            {
+              "number": "905",
+              "numText": "§ 905.",
+              "heading": "Exclusive rights in mask works",
+              "identifier": "/us/usc/t17/s905"
+            },
+            {
+              "number": "906",
+              "numText": "§ 906.",
+              "heading": "Limitation on exclusive rights: reverse engineering; first sale",
+              "identifier": "/us/usc/t17/s906"
+            },
+            {
+              "number": "907",
+              "numText": "§ 907.",
+              "heading": "Limitation on exclusive rights: innocent infringement",
+              "identifier": "/us/usc/t17/s907"
+            },
+            {
+              "number": "908",
+              "numText": "§ 908.",
+              "heading": "Registration of claims of protection",
+              "identifier": "/us/usc/t17/s908"
+            },
+            {
+              "number": "909",
+              "numText": "§ 909.",
+              "heading": "Mask work notice",
+              "identifier": "/us/usc/t17/s909"
+            },
+            {
+              "number": "910",
+              "numText": "§ 910.",
+              "heading": "Enforcement of exclusive rights",
+              "identifier": "/us/usc/t17/s910"
+            },
+            {
+              "number": "911",
+              "numText": "§ 911.",
+              "heading": "Civil actions",
+              "identifier": "/us/usc/t17/s911"
+            },
+            {
+              "number": "912",
+              "numText": "§ 912.",
+              "heading": "Relation to other laws",
+              "identifier": "/us/usc/t17/s912"
+            },
+            {
+              "number": "913",
+              "numText": "§ 913.",
+              "heading": "Transitional provisions",
+              "identifier": "/us/usc/t17/s913"
+            },
+            {
+              "number": "914",
+              "numText": "§ 914.",
+              "heading": "International transitional provisions",
+              "identifier": "/us/usc/t17/s914"
+            }
+          ]
+        },
+        {
+          "number": "10",
+          "heading": "DIGITAL AUDIO RECORDING DEVICES AND MEDIA",
+          "identifier": "/us/usc/t17/ch10",
+          "sections": [
+            {
+              "number": "1001",
+              "numText": "§ 1001.",
+              "heading": "Definitions",
+              "identifier": "/us/usc/t17/s1001"
+            },
+            {
+              "number": "1002",
+              "numText": "§ 1002.",
+              "heading": "Incorporation of copying controls",
+              "identifier": "/us/usc/t17/s1002"
+            },
+            {
+              "number": "1003",
+              "numText": "§ 1003.",
+              "heading": "Obligation to make royalty payments",
+              "identifier": "/us/usc/t17/s1003"
+            },
+            {
+              "number": "1004",
+              "numText": "§ 1004.",
+              "heading": "Royalty payments",
+              "identifier": "/us/usc/t17/s1004"
+            },
+            {
+              "number": "1005",
+              "numText": "§ 1005.",
+              "heading": "Deposit of royalty payments and deduction of expenses",
+              "identifier": "/us/usc/t17/s1005"
+            },
+            {
+              "number": "1006",
+              "numText": "§ 1006.",
+              "heading": "Entitlement to royalty payments",
+              "identifier": "/us/usc/t17/s1006"
+            },
+            {
+              "number": "1007",
+              "numText": "§ 1007.",
+              "heading": "Procedures for distributing royalty payments",
+              "identifier": "/us/usc/t17/s1007"
+            },
+            {
+              "number": "1008",
+              "numText": "§ 1008.",
+              "heading": "Prohibition on certain infringement actions",
+              "identifier": "/us/usc/t17/s1008"
+            },
+            {
+              "number": "1009",
+              "numText": "§ 1009.",
+              "heading": "Civil remedies",
+              "identifier": "/us/usc/t17/s1009"
+            },
+            {
+              "number": "1010",
+              "numText": "§ 1010.",
+              "heading": "Determination of certain disputes",
+              "identifier": "/us/usc/t17/s1010"
+            }
+          ]
+        },
+        {
+          "number": "11",
+          "heading": "SOUND RECORDINGS AND MUSIC VIDEOS",
+          "identifier": "/us/usc/t17/ch11",
+          "sections": [
+            {
+              "number": "1101",
+              "numText": "§ 1101.",
+              "heading": "Unauthorized fixation and trafficking in sound recordings and music videos",
+              "identifier": "/us/usc/t17/s1101"
+            }
+          ]
+        },
+        {
+          "number": "12",
+          "heading": "COPYRIGHT PROTECTION AND MANAGEMENT SYSTEMS",
+          "identifier": "/us/usc/t17/ch12",
+          "sections": [
+            {
+              "number": "1201",
+              "numText": "§ 1201.",
+              "heading": "Circumvention of copyright protection systems",
+              "identifier": "/us/usc/t17/s1201"
+            },
+            {
+              "number": "1202",
+              "numText": "§ 1202.",
+              "heading": "Integrity of copyright management information",
+              "identifier": "/us/usc/t17/s1202"
+            },
+            {
+              "number": "1203",
+              "numText": "§ 1203.",
+              "heading": "Civil remedies",
+              "identifier": "/us/usc/t17/s1203"
+            },
+            {
+              "number": "1204",
+              "numText": "§ 1204.",
+              "heading": "Criminal offenses and penalties",
+              "identifier": "/us/usc/t17/s1204"
+            },
+            {
+              "number": "1205",
+              "numText": "§ 1205.",
+              "heading": "Savings clause",
+              "identifier": "/us/usc/t17/s1205"
+            }
+          ]
+        },
+        {
+          "number": "13",
+          "heading": "PROTECTION OF ORIGINAL DESIGNS",
+          "identifier": "/us/usc/t17/ch13",
+          "sections": [
+            {
+              "number": "1301",
+              "numText": "§ 1301.",
+              "heading": "Designs protected",
+              "identifier": "/us/usc/t17/s1301"
+            },
+            {
+              "number": "1302",
+              "numText": "§ 1302.",
+              "heading": "Designs not subject to protection",
+              "identifier": "/us/usc/t17/s1302"
+            },
+            {
+              "number": "1303",
+              "numText": "§ 1303.",
+              "heading": "Revisions, adaptations, and rearrangements",
+              "identifier": "/us/usc/t17/s1303"
+            },
+            {
+              "number": "1304",
+              "numText": "§ 1304.",
+              "heading": "Commencement of protection",
+              "identifier": "/us/usc/t17/s1304"
+            },
+            {
+              "number": "1305",
+              "numText": "§ 1305.",
+              "heading": "Term of protection",
+              "identifier": "/us/usc/t17/s1305"
+            },
+            {
+              "number": "1306",
+              "numText": "§ 1306.",
+              "heading": "Design notice",
+              "identifier": "/us/usc/t17/s1306"
+            },
+            {
+              "number": "1307",
+              "numText": "§ 1307.",
+              "heading": "Effect of omission of notice",
+              "identifier": "/us/usc/t17/s1307"
+            },
+            {
+              "number": "1308",
+              "numText": "§ 1308.",
+              "heading": "Exclusive rights",
+              "identifier": "/us/usc/t17/s1308"
+            },
+            {
+              "number": "1309",
+              "numText": "§ 1309.",
+              "heading": "Infringement",
+              "identifier": "/us/usc/t17/s1309"
+            },
+            {
+              "number": "1310",
+              "numText": "§ 1310.",
+              "heading": "Application for registration",
+              "identifier": "/us/usc/t17/s1310"
+            },
+            {
+              "number": "1311",
+              "numText": "§ 1311.",
+              "heading": "Benefit of earlier filing date in foreign country",
+              "identifier": "/us/usc/t17/s1311"
+            },
+            {
+              "number": "1312",
+              "numText": "§ 1312.",
+              "heading": "Oaths and acknowledgments",
+              "identifier": "/us/usc/t17/s1312"
+            },
+            {
+              "number": "1313",
+              "numText": "§ 1313.",
+              "heading": "Examination of application and issue or refusal of registration",
+              "identifier": "/us/usc/t17/s1313"
+            },
+            {
+              "number": "1314",
+              "numText": "§ 1314.",
+              "heading": "Certification of registration",
+              "identifier": "/us/usc/t17/s1314"
+            },
+            {
+              "number": "1315",
+              "numText": "§ 1315.",
+              "heading": "Publication of announcements and indexes",
+              "identifier": "/us/usc/t17/s1315"
+            },
+            {
+              "number": "1316",
+              "numText": "§ 1316.",
+              "heading": "Fees",
+              "identifier": "/us/usc/t17/s1316"
+            },
+            {
+              "number": "1317",
+              "numText": "§ 1317.",
+              "heading": "Regulations",
+              "identifier": "/us/usc/t17/s1317"
+            },
+            {
+              "number": "1318",
+              "numText": "§ 1318.",
+              "heading": "Copies of records",
+              "identifier": "/us/usc/t17/s1318"
+            },
+            {
+              "number": "1319",
+              "numText": "§ 1319.",
+              "heading": "Correction of errors in certificates",
+              "identifier": "/us/usc/t17/s1319"
+            },
+            {
+              "number": "1320",
+              "numText": "§ 1320.",
+              "heading": "Ownership and transfer",
+              "identifier": "/us/usc/t17/s1320"
+            },
+            {
+              "number": "1321",
+              "numText": "§ 1321.",
+              "heading": "Remedy for infringement",
+              "identifier": "/us/usc/t17/s1321"
+            },
+            {
+              "number": "1322",
+              "numText": "§ 1322.",
+              "heading": "Injunctions",
+              "identifier": "/us/usc/t17/s1322"
+            },
+            {
+              "number": "1323",
+              "numText": "§ 1323.",
+              "heading": "Recovery for infringement",
+              "identifier": "/us/usc/t17/s1323"
+            },
+            {
+              "number": "1324",
+              "numText": "§ 1324.",
+              "heading": "Power of court over registration",
+              "identifier": "/us/usc/t17/s1324"
+            },
+            {
+              "number": "1325",
+              "numText": "§ 1325.",
+              "heading": "Liability for action on registration fraudulently obtained",
+              "identifier": "/us/usc/t17/s1325"
+            },
+            {
+              "number": "1326",
+              "numText": "§ 1326.",
+              "heading": "Penalty for false marking",
+              "identifier": "/us/usc/t17/s1326"
+            },
+            {
+              "number": "1327",
+              "numText": "§ 1327.",
+              "heading": "Penalty for false representation",
+              "identifier": "/us/usc/t17/s1327"
+            },
+            {
+              "number": "1328",
+              "numText": "§ 1328.",
+              "heading": "Enforcement by Treasury and Postal Service",
+              "identifier": "/us/usc/t17/s1328"
+            },
+            {
+              "number": "1329",
+              "numText": "§ 1329.",
+              "heading": "Relation to design patent law",
+              "identifier": "/us/usc/t17/s1329"
+            },
+            {
+              "number": "1330",
+              "numText": "§ 1330.",
+              "heading": "Common law and other rights unaffected",
+              "identifier": "/us/usc/t17/s1330"
+            },
+            {
+              "number": "1331",
+              "numText": "§ 1331.",
+              "heading": "Administrator; Office of the Administrator",
+              "identifier": "/us/usc/t17/s1331"
+            },
+            {
+              "number": "1332",
+              "numText": "§ 1332.",
+              "heading": "No retroactive effect",
+              "identifier": "/us/usc/t17/s1332"
+            }
+          ]
+        },
+        {
+          "number": "14",
+          "heading": "UNAUTHORIZED USE OF PRE-1972 SOUND RECORDINGS",
+          "identifier": "/us/usc/t17/ch14",
+          "sections": [
+            {
+              "number": "1401",
+              "numText": "§ 1401.",
+              "heading": "Unauthorized use of pre-1972 sound recordings",
+              "identifier": "/us/usc/t17/s1401"
+            }
+          ]
+        },
+        {
+          "number": "15",
+          "heading": "COPYRIGHT SMALL CLAIMS",
+          "identifier": "/us/usc/t17/ch15",
+          "sections": [
+            {
+              "number": "1501",
+              "numText": "§ 1501.",
+              "heading": "Definitions",
+              "identifier": "/us/usc/t17/s1501"
+            },
+            {
+              "number": "1502",
+              "numText": "§ 1502.",
+              "heading": "Copyright Claims Board",
+              "identifier": "/us/usc/t17/s1502"
+            },
+            {
+              "number": "1503",
+              "numText": "§ 1503.",
+              "heading": "Authority and duties of the Copyright Claims Board",
+              "identifier": "/us/usc/t17/s1503"
+            },
+            {
+              "number": "1504",
+              "numText": "§ 1504.",
+              "heading": "Nature of proceedings",
+              "identifier": "/us/usc/t17/s1504"
+            },
+            {
+              "number": "1505",
+              "numText": "§ 1505.",
+              "heading": "Registration requirement",
+              "identifier": "/us/usc/t17/s1505"
+            },
+            {
+              "number": "1506",
+              "numText": "§ 1506.",
+              "heading": "Conduct of proceedings",
+              "identifier": "/us/usc/t17/s1506"
+            },
+            {
+              "number": "1507",
+              "numText": "§ 1507.",
+              "heading": "Effect of proceeding",
+              "identifier": "/us/usc/t17/s1507"
+            },
+            {
+              "number": "1508",
+              "numText": "§ 1508.",
+              "heading": "Review and confirmation by district court",
+              "identifier": "/us/usc/t17/s1508"
+            },
+            {
+              "number": "1509",
+              "numText": "§ 1509.",
+              "heading": "Relationship to other district court actions",
+              "identifier": "/us/usc/t17/s1509"
+            },
+            {
+              "number": "1510",
+              "numText": "§ 1510.",
+              "heading": "Implementation by Copyright Office",
+              "identifier": "/us/usc/t17/s1510"
+            },
+            {
+              "number": "1511",
+              "numText": "§ 1511.",
+              "heading": "Funding",
+              "identifier": "/us/usc/t17/s1511"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
