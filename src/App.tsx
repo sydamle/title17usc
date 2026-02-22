@@ -551,7 +551,55 @@ const TOPIC_HEADING: Record<string, string> = {
   executiveOrder: 'Executive Order',
 };
 
-function NotesPanel({ notes }: { notes: NoteBlock[] }) {
+// ======== USLM link resolver ========
+// Converts USLM identifiers (e.g. /us/pl/106/113, /us/usc/t17/s101) to real
+// URLs, and handles in-app navigation for Title 17 cross-references.
+
+function handleUslmClick(
+  e: React.MouseEvent,
+  onNavigate: (v: ViewState) => void,
+) {
+  const anchor = (e.target as Element).closest('a');
+  if (!anchor) return;
+  const href = anchor.getAttribute('href');
+  if (!href || !href.startsWith('/us/')) return;
+
+  e.preventDefault();
+
+  // Title 17 US Code cross-reference: /us/usc/t17/s801[...]
+  const uscMatch = href.match(/^\/us\/usc\/t17\/s(\d+[A-Z0-9]*)/i);
+  if (uscMatch) {
+    onNavigate({ type: 'section', sectionNum: uscMatch[1] });
+    return;
+  }
+
+  // Public Law: /us/pl/{congress}/{law}[/section-parts]
+  const plMatch = href.match(/^\/us\/pl\/(\d+)\/(\d+)/);
+  if (plMatch) {
+    window.open(
+      `https://www.govinfo.gov/link/plaw/${plMatch[1]}/public/${plMatch[2]}`,
+      '_blank',
+      'noopener,noreferrer',
+    );
+    return;
+  }
+
+  // Statutes at Large: /us/stat/{volume}/{page}
+  const statMatch = href.match(/^\/us\/stat\/(\d+)\/(\d+)/);
+  if (statMatch) {
+    window.open(
+      `https://www.govinfo.gov/link/statute/${statMatch[1]}/${statMatch[2]}`,
+      '_blank',
+      'noopener,noreferrer',
+    );
+    return;
+  }
+
+  // Other USC titles and historical acts: no in-app navigation available;
+  // prevent broken relative-path navigation.
+}
+
+function NotesPanel({ notes, onNavigate }: { notes: NoteBlock[]; onNavigate: (v: ViewState) => void }) {
   // Merge consecutive heading-only notes into the next note with content,
   // so "Historical and Revision Notes" acts as a section header.
   const rendered: { heading: string; isHeader: boolean; html: string }[] = [];
@@ -577,7 +625,7 @@ function NotesPanel({ notes }: { notes: NoteBlock[] }) {
   }
 
   return (
-    <div className="notes-panel">
+    <div className="notes-panel" onClick={e => handleUslmClick(e, onNavigate)}>
       {rendered.map((item, i) => (
         <div key={i} className="note-section">
           {item.heading && (
@@ -789,10 +837,14 @@ function SectionView({
         </div>
 
         {activeTab === 'notes' ? (
-          <NotesPanel notes={section.notes} />
+          <NotesPanel notes={section.notes} onNavigate={onNavigate} />
         ) : null}
 
-        <div className="statutory-text" hidden={activeTab === 'notes'}>
+        <div
+          className="statutory-text"
+          hidden={activeTab === 'notes'}
+          onClick={e => handleUslmClick(e, onNavigate)}
+        >
           {section.content.length === 0 ? (
             <p style={{ color: '#767676', fontStyle: 'italic' }}>
               [Repealed or text omitted]
