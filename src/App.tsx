@@ -531,9 +531,6 @@ function ChapterView({
 
 // ======== Section View ========
 
-// Sections that have paragraph tools enabled
-const PARA_TOOLS_SECTIONS = new Set(['115', '701']);
-
 function SectionView({
   sectionNum,
   paragraphAnchor,
@@ -571,10 +568,10 @@ function SectionView({
 
   const section: SectionData | undefined = sections?.[sectionNum];
 
-  // Build paragraph metadata map (only for sections with tools enabled)
+  // Build paragraph metadata map for all sections except § 101 (which has its own definition tools)
   const paraMetaMap = useMemo(
     () =>
-      section && PARA_TOOLS_SECTIONS.has(sectionNum)
+      section && sectionNum !== '101'
         ? buildParaMetaMap(section.content, sectionNum)
         : new Map<number, { path: string; id: string }>(),
     [section, sectionNum],
