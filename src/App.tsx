@@ -1,5 +1,5 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
-import { TocData, TocChapter, TocSection, SectionData, SectionsMap } from './types';
+import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react';
+import { TocData, TocChapter, TocSection, SectionData, ContentBlock, SectionsMap } from './types';
 import tocJsonImport from './data/toc.json';
 
 // TOC is small (32KB) — import directly for instant sidebar render
@@ -49,12 +49,121 @@ function highlightText(text: string, query: string): React.ReactNode {
   );
 }
 
+// ======== Paragraph tool helpers ========
+
+// Block types that correspond to structural subdivisions in the USC
+const STRUCTURAL_TYPES = new Set([
+  'subsection', 'paragraph', 'subparagraph', 'clause', 'subclause', 'item', 'subitem',
+]);
+
+// Extract the text inside <span class="num">...</span> and everything after it
+function splitBlockHtml(html: string): { numText: string; restHtml: string } | null {
+  const m = html.match(/^<span class="num">([^<]*)<\/span>([\s\S]*)/);
+  if (!m) return null;
+  return { numText: m[1], restHtml: m[2] };
+}
+
+// Build a map of block-index → { path, id } for all structural blocks in a section.
+// "path" is the concatenated designators from root to this block, e.g. "(b)(1)".
+function buildParaMetaMap(
+  content: ContentBlock[],
+  sectionNum: string,
+): Map<number, { path: string; id: string }> {
+  const map = new Map<number, { path: string; id: string }>();
+  const stack: Array<{ indent: number; numText: string }> = [];
+  content.forEach((block, i) => {
+    if (!STRUCTURAL_TYPES.has(block.type)) return;
+    const split = splitBlockHtml(block.html);
+    if (!split) return;
+    // Pop any stack entries at the same or deeper indent level
+    while (stack.length > 0 && stack[stack.length - 1].indent >= block.indent) {
+      stack.pop();
+    }
+    stack.push({ indent: block.indent, numText: split.numText.trim() });
+    const path = stack.map(e => e.numText).join(''); // e.g., "(b)(1)"
+    map.set(i, { path, id: `p-${sectionNum}${path}` });
+  });
+  return map;
+}
+
+// ======== Paragraph Popup ========
+
+interface PopupState {
+  blockIndex: number;
+  url: string;
+  citation: string;
+}
+
+function ParagraphPopup({
+  url,
+  citation,
+  onClose,
+}: {
+  url: string;
+  citation: string;
+  onClose: () => void;
+}) {
+  const [urlCopied, setUrlCopied] = useState(false);
+  const [citCopied, setCitCopied] = useState(false);
+
+  const copy = async (text: string, setFlag: (v: boolean) => void) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setFlag(true);
+      setTimeout(() => setFlag(false), 2000);
+    } catch {
+      // Fallback for environments without clipboard API
+      const el = document.createElement('textarea');
+      el.value = text;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+      setFlag(true);
+      setTimeout(() => setFlag(false), 2000);
+    }
+  };
+
+  return (
+    <div className="para-popup" role="region" aria-label="Paragraph tools">
+      <div className="para-popup-header">
+        <span>Paragraph Tools</span>
+        <button className="para-popup-close" onClick={onClose} aria-label="Close paragraph tools">
+          ×
+        </button>
+      </div>
+      <div className="para-popup-body">
+        <div className="para-popup-row">
+          <span className="para-popup-label">URL</span>
+          <span className="para-popup-value">{url}</span>
+          <button
+            className={`para-popup-copy-btn${urlCopied ? ' copied' : ''}`}
+            onClick={() => copy(url, setUrlCopied)}
+          >
+            {urlCopied ? '✓ Copied' : 'Copy'}
+          </button>
+        </div>
+        <div className="para-popup-row">
+          <span className="para-popup-label">Citation</span>
+          <span className="para-popup-value">{citation}</span>
+          <button
+            className={`para-popup-copy-btn${citCopied ? ' copied' : ''}`}
+            onClick={() => copy(citation, setCitCopied)}
+          >
+            {citCopied ? '✓ Copied' : 'Copy'}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ======== Types for view state ========
 
 type ViewState =
   | { type: 'home' }
   | { type: 'chapter'; chapterNum: string }
-  | { type: 'section'; sectionNum: string };
+  | { type: 'section'; sectionNum: string; paragraphAnchor?: string };
 
 // ======== Sidebar ========
 
@@ -377,14 +486,25 @@ function ChapterView({
 
 // ======== Section View ========
 
+// Sections that have paragraph tools enabled
+const PARA_TOOLS_SECTIONS = new Set(['701']);
+
 function SectionView({
   sectionNum,
+  paragraphAnchor,
   onNavigate,
 }: {
   sectionNum: string;
+  paragraphAnchor?: string;
   onNavigate: (v: ViewState) => void;
 }) {
   const sections = useSections();
+  const [activePopup, setActivePopup] = useState<PopupState | null>(null);
+
+  // Reset popup when navigating to a different section
+  useEffect(() => {
+    setActivePopup(null);
+  }, [sectionNum]);
 
   let chapter: TocChapter | undefined;
   let tocSection: TocSection | undefined;
@@ -404,6 +524,28 @@ function SectionView({
   const nextSection =
     sectionIndex < allSections.length - 1 ? allSections[sectionIndex + 1] : null;
 
+  const section: SectionData | undefined = sections?.[sectionNum];
+
+  // Build paragraph metadata map (only for sections with tools enabled)
+  const paraMetaMap = useMemo(
+    () =>
+      section && PARA_TOOLS_SECTIONS.has(sectionNum)
+        ? buildParaMetaMap(section.content, sectionNum)
+        : new Map<number, { path: string; id: string }>(),
+    [section, sectionNum],
+  );
+
+  // Scroll to the paragraph anchor once content is ready
+  useEffect(() => {
+    if (!section || !paragraphAnchor) return;
+    const id = `p-${sectionNum}${paragraphAnchor}`;
+    const timer = setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [section, sectionNum, paragraphAnchor]);
+
   if (!sections) {
     return (
       <>
@@ -417,8 +559,6 @@ function SectionView({
       </>
     );
   }
-
-  const section: SectionData | undefined = sections[sectionNum];
 
   if (!section) {
     return (
@@ -518,6 +658,47 @@ function SectionView({
                 .filter(Boolean)
                 .join(' ');
 
+              // Paragraph-tool-enabled block
+              const meta = paraMetaMap.get(i);
+              if (meta) {
+                const split = splitBlockHtml(block.html);
+                if (split) {
+                  const isActive = activePopup?.blockIndex === i;
+                  const paraUrl =
+                    `${window.location.origin}${window.location.pathname}` +
+                    `#section/${sectionNum}${meta.path}`;
+                  const citation = `17 U.S.C. § ${sectionNum}${meta.path}`;
+
+                  return (
+                    <React.Fragment key={i}>
+                      <div className={className} id={meta.id}>
+                        <button
+                          className={`para-num-btn${isActive ? ' active' : ''}`}
+                          onClick={() =>
+                            isActive
+                              ? setActivePopup(null)
+                              : setActivePopup({ blockIndex: i, url: paraUrl, citation })
+                          }
+                          aria-expanded={isActive}
+                          title={`Paragraph tools for ${meta.path}`}
+                        >
+                          {split.numText}
+                        </button>
+                        <span dangerouslySetInnerHTML={{ __html: split.restHtml }} />
+                      </div>
+                      {isActive && (
+                        <ParagraphPopup
+                          url={activePopup!.url}
+                          citation={activePopup!.citation}
+                          onClose={() => setActivePopup(null)}
+                        />
+                      )}
+                    </React.Fragment>
+                  );
+                }
+              }
+
+              // Default rendering
               return (
                 <div
                   key={i}
@@ -545,8 +726,18 @@ function SectionView({
 function parseHash(hash: string): ViewState {
   const h = hash.replace(/^#\/?/, '');
   if (!h) return { type: 'home' };
-  if (h.startsWith('section/'))
-    return { type: 'section', sectionNum: h.slice('section/'.length) };
+  if (h.startsWith('section/')) {
+    const rest = h.slice('section/'.length); // e.g., "701" or "701(a)" or "701(b)(1)"
+    const parenIdx = rest.indexOf('(');
+    if (parenIdx > 0) {
+      return {
+        type: 'section',
+        sectionNum: rest.slice(0, parenIdx),
+        paragraphAnchor: rest.slice(parenIdx),
+      };
+    }
+    return { type: 'section', sectionNum: rest };
+  }
   if (h.startsWith('chapter/'))
     return { type: 'chapter', chapterNum: h.slice('chapter/'.length) };
   return { type: 'home' };
@@ -630,6 +821,10 @@ export default function App() {
               sectionNum={
                 (view as { type: 'section'; sectionNum: string }).sectionNum
               }
+              paragraphAnchor={
+                (view as { type: 'section'; sectionNum: string; paragraphAnchor?: string })
+                  .paragraphAnchor
+              }
               onNavigate={navigate}
             />
           )}
@@ -638,3 +833,4 @@ export default function App() {
     </div>
   );
 }
+
