@@ -107,7 +107,8 @@ function parseSec101Defs(html: string): Sec101Def[] {
     let slug: string | null = null;
     // Only top-level definition paragraphs get a term badge
     if (indentClass === 'indent1') {
-      const tm = innerHtml.match(/"([^"]+)"/);
+      // The XML uses Unicode curly quotes \u201C…\u201D, not ASCII "
+      const tm = innerHtml.match(/\u201c([^\u201d]+)\u201d/);
       if (tm) {
         term = tm[1];
         slug = term.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
@@ -124,7 +125,7 @@ function splitAtFirstTerm(
   html: string,
   term: string,
 ): { before: string; after: string } | null {
-  const target = `"${term}"`;
+  const target = `\u201c${term}\u201d`; // curly quotes: "term"
   const idx = html.indexOf(target);
   if (idx === -1) return null;
   return { before: html.slice(0, idx), after: html.slice(idx + target.length) };
