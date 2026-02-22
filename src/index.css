@@ -597,6 +597,18 @@ mark {
 .usc-block p.indent2 { padding-left: 56px; }
 .usc-block p.indent3 { padding-left: 84px; }
 
+/* ===== SECTION 101 DEFINITIONS ===== */
+/* Each definition is a top-level <p> rendered individually */
+p.sec101-def {
+  margin: 0 0 3px 0;
+  line-height: 1.75;
+  font-size: 15.5px;
+}
+p.sec101-def.indent0 { padding-left: 0; }
+p.sec101-def.indent1 { padding-left: 28px; }
+p.sec101-def.indent2 { padding-left: 56px; }
+p.sec101-def.indent3 { padding-left: 84px; }
+
 /* ===== PARAGRAPH TOOLS ===== */
 
 /* The clickable paragraph designator badge, e.g. "(a)", "(1)" */

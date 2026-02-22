@@ -86,10 +86,54 @@ function buildParaMetaMap(
   return map;
 }
 
+// ======== Section 101 definition helpers ========
+
+interface Sec101Def {
+  indentClass: string;   // e.g. "indent0", "indent1", "indent2"
+  innerHtml: string;     // HTML content inside the <p> tag
+  term: string | null;   // the defined term (without quotes), e.g. "anonymous work"
+  slug: string | null;   // URL-safe slug, e.g. "anonymous-work"
+}
+
+// Parse the monolithic section 101 HTML into individual paragraph objects.
+function parseSec101Defs(html: string): Sec101Def[] {
+  const result: Sec101Def[] = [];
+  const pRegex = /<p class="(indent\d+)">([\s\S]*?)<\/p>/g;
+  let m: RegExpExecArray | null;
+  while ((m = pRegex.exec(html)) !== null) {
+    const indentClass = m[1];
+    const innerHtml = m[2];
+    let term: string | null = null;
+    let slug: string | null = null;
+    // Only top-level definition paragraphs get a term badge
+    if (indentClass === 'indent1') {
+      const tm = innerHtml.match(/"([^"]+)"/);
+      if (tm) {
+        term = tm[1];
+        slug = term.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+      }
+    }
+    result.push({ indentClass, innerHtml, term, slug });
+  }
+  return result;
+}
+
+// Split a definition's inner HTML at the first occurrence of "term",
+// returning the text before and after (with quotes consumed).
+function splitAtFirstTerm(
+  html: string,
+  term: string,
+): { before: string; after: string } | null {
+  const target = `"${term}"`;
+  const idx = html.indexOf(target);
+  if (idx === -1) return null;
+  return { before: html.slice(0, idx), after: html.slice(idx + target.length) };
+}
+
 // ======== Paragraph Popup ========
 
 interface PopupState {
-  blockIndex: number;
+  id: string;   // String(blockIndex) for structural blocks; "def-101-{slug}" for definitions
   url: string;
   citation: string;
 }
@@ -535,10 +579,23 @@ function SectionView({
     [section, sectionNum],
   );
 
-  // Scroll to the paragraph anchor once content is ready
+  // Parse section 101 definitions (only for § 101)
+  const sec101Defs = useMemo(
+    () =>
+      sectionNum === '101' && section
+        ? parseSec101Defs(section.content[0]?.html ?? '')
+        : [],
+    [section, sectionNum],
+  );
+
+  // Scroll to the paragraph/definition anchor once content is ready
   useEffect(() => {
     if (!section || !paragraphAnchor) return;
-    const id = `p-${sectionNum}${paragraphAnchor}`;
+    // Definition anchor: "def/anonymous-work" → id "def-101-anonymous-work"
+    // Paragraph anchor:  "(a)"              → id "p-701(a)"
+    const id = paragraphAnchor.startsWith('def/')
+      ? `def-${sectionNum}-${paragraphAnchor.slice(4)}`
+      : `p-${sectionNum}${paragraphAnchor}`;
     const timer = setTimeout(() => {
       const el = document.getElementById(id);
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -647,7 +704,60 @@ function SectionView({
             <p style={{ color: '#767676', fontStyle: 'italic' }}>
               [Repealed or text omitted]
             </p>
+          ) : sectionNum === '101' && sec101Defs.length > 0 ? (
+            // ── § 101 Definitions: each paragraph rendered individually ──
+            sec101Defs.map((def, i) => {
+              const popupId = `def-101-${def.slug}`;
+              const isActive = activePopup?.id === popupId;
+
+              if (def.term && def.slug) {
+                const split = splitAtFirstTerm(def.innerHtml, def.term);
+                if (split) {
+                  const url =
+                    `${window.location.origin}${window.location.pathname}` +
+                    `#section/101/def/${def.slug}`;
+                  const citation = `17 U.S.C. § 101 "${def.term}"`;
+                  return (
+                    <React.Fragment key={i}>
+                      <p className={`sec101-def ${def.indentClass}`} id={popupId}>
+                        <span dangerouslySetInnerHTML={{ __html: split.before }} />
+                        <button
+                          className={`para-num-btn${isActive ? ' active' : ''}`}
+                          onClick={() =>
+                            isActive
+                              ? setActivePopup(null)
+                              : setActivePopup({ id: popupId, url, citation })
+                          }
+                          aria-expanded={isActive}
+                          title={`Paragraph tools for "${def.term}"`}
+                        >
+                          {def.term}
+                        </button>
+                        <span dangerouslySetInnerHTML={{ __html: split.after }} />
+                      </p>
+                      {isActive && (
+                        <ParagraphPopup
+                          url={activePopup!.url}
+                          citation={activePopup!.citation}
+                          onClose={() => setActivePopup(null)}
+                        />
+                      )}
+                    </React.Fragment>
+                  );
+                }
+              }
+
+              // Non-definition paragraph (indent0 intro, indent2/3 sub-items)
+              return (
+                <p
+                  key={i}
+                  className={`sec101-def ${def.indentClass}`}
+                  dangerouslySetInnerHTML={{ __html: def.innerHtml }}
+                />
+              );
+            })
           ) : (
+            // ── All other sections ──
             section.content.map((block, i) => {
               const indentLevel = Math.min(block.indent, 6);
               const className = [
@@ -663,7 +773,7 @@ function SectionView({
               if (meta) {
                 const split = splitBlockHtml(block.html);
                 if (split) {
-                  const isActive = activePopup?.blockIndex === i;
+                  const isActive = activePopup?.id === String(i);
                   const paraUrl =
                     `${window.location.origin}${window.location.pathname}` +
                     `#section/${sectionNum}${meta.path}`;
@@ -677,7 +787,7 @@ function SectionView({
                           onClick={() =>
                             isActive
                               ? setActivePopup(null)
-                              : setActivePopup({ blockIndex: i, url: paraUrl, citation })
+                              : setActivePopup({ id: String(i), url: paraUrl, citation })
                           }
                           aria-expanded={isActive}
                           title={`Paragraph tools for ${meta.path}`}
@@ -727,7 +837,17 @@ function parseHash(hash: string): ViewState {
   const h = hash.replace(/^#\/?/, '');
   if (!h) return { type: 'home' };
   if (h.startsWith('section/')) {
-    const rest = h.slice('section/'.length); // e.g., "701" or "701(a)" or "701(b)(1)"
+    const rest = h.slice('section/'.length);
+    // Definition anchor: "101/def/anonymous-work"
+    const defMatch = rest.match(/^(\d+[A-Z]*)\/def\/(.+)$/);
+    if (defMatch) {
+      return {
+        type: 'section',
+        sectionNum: defMatch[1],
+        paragraphAnchor: `def/${defMatch[2]}`,
+      };
+    }
+    // Paragraph anchor: "701(a)" or "701(b)(1)"
     const parenIdx = rest.indexOf('(');
     if (parenIdx > 0) {
       return {
