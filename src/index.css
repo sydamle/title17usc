@@ -735,6 +735,94 @@ p.sec101-def.indent3 { padding-left: 84px; }
   color: #2e7d32;
 }
 
+/* Section tabs (Text / Notes) */
+.section-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid #dfe1e2;
+  margin: 0 0 24px 0;
+}
+
+.section-tab {
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #565c65;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.section-tab:hover {
+  color: #1a4480;
+}
+
+.section-tab.active {
+  color: #1a4480;
+  border-bottom-color: #1a4480;
+}
+
+/* Notes panel */
+.notes-panel {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #1b1b1b;
+  max-width: 800px;
+}
+
+.note-section {
+  margin-bottom: 28px;
+}
+
+.note-heading {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #3d4551;
+  margin: 0 0 10px 0;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #dfe1e2;
+}
+
+.note-heading.note-heading-group {
+  color: #1a4480;
+  border-bottom-color: #bed0e5;
+}
+
+.note-body p {
+  margin: 0 0 10px 0;
+}
+
+.note-body p.indent0 {
+  margin-left: 0;
+}
+
+.note-body p.indent1 {
+  margin-left: 28px;
+}
+
+.note-body p.indent2 {
+  margin-left: 56px;
+}
+
+.note-body .subnote-heading {
+  font-weight: 600;
+  margin-top: 14px;
+}
+
+.note-body a.ref {
+  color: #005ea2;
+  text-decoration: none;
+}
+
+.note-body a.ref:hover {
+  text-decoration: underline;
+}
+
 /* Source credit */
 .source-credit {
   margin-top: 28px;

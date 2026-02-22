@@ -283,6 +283,56 @@ def get_source_credit(section_el):
     sc_el = section_el.find(tag('sourceCredit'))
     return get_full_text(sc_el).strip() if sc_el is not None else ''
 
+def _note_to_html(note_el):
+    """Convert a <note> element's body (excluding its <heading>) to HTML."""
+    parts = []
+    for child in note_el:
+        ln = local_name(child)
+        if ln == 'heading':
+            continue
+        if ln == 'p':
+            inner = inline_to_html(child)
+            if inner.strip():
+                cls = child.get('class', '')
+                if cls:
+                    parts.append(f'<p class="{cls}">{inner}</p>')
+                else:
+                    parts.append(f'<p>{inner}</p>')
+        elif ln == 'note':
+            # Nested subnote – recurse and wrap in a div
+            inner_html = _note_to_html(child)
+            sub_heading_el = child.find(tag('heading'))
+            sub_heading = get_full_text(sub_heading_el).strip() if sub_heading_el is not None else ''
+            if sub_heading:
+                parts.append(f'<p class="subnote-heading">{escape_html(sub_heading)}</p>')
+            if inner_html:
+                parts.append(inner_html)
+        else:
+            inner = inline_to_html(child)
+            if inner.strip():
+                parts.append(f'<p>{inner}</p>')
+        if child.tail and child.tail.strip():
+            parts.append(escape_html(child.tail))
+    return ''.join(parts)
+
+def get_notes(section_el):
+    """Extract the <notes> element into a list of note dicts."""
+    notes_el = section_el.find(tag('notes'))
+    if notes_el is None:
+        return []
+
+    notes = []
+    for note_el in notes_el.findall(tag('note')):
+        topic = note_el.get('topic', 'miscellaneous')
+        heading_el = note_el.find(tag('heading'))
+        heading = get_full_text(heading_el).strip() if heading_el is not None else ''
+        html = _note_to_html(note_el)
+        # Skip completely empty notes (heading-only historicalAndRevision stubs
+        # that have no body text are common; include them so the heading shows)
+        notes.append({'topic': topic, 'heading': heading, 'html': html})
+
+    return notes
+
 def parse_section(section_el):
     identifier = section_el.get('identifier', '')
     num_el = section_el.find(tag('num'))
@@ -294,6 +344,7 @@ def parse_section(section_el):
 
     content_blocks = parse_section_to_blocks(section_el)
     source_credit = get_source_credit(section_el)
+    notes = get_notes(section_el)
 
     return {
         'number': num_val,
@@ -302,6 +353,7 @@ def parse_section(section_el):
         'identifier': identifier,
         'content': content_blocks,
         'sourceCredit': source_credit,
+        'notes': notes,
     }
 
 def parse_chapter(chapter_el):

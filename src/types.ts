@@ -26,6 +26,12 @@ export interface ContentBlock {
   html: string;
 }
 
+export interface NoteBlock {
+  topic: string;
+  heading: string;
+  html: string;
+}
+
 export interface SectionData {
   number: string;
   numText: string;
@@ -33,6 +39,7 @@ export interface SectionData {
   identifier: string;
   content: ContentBlock[];
   sourceCredit: string;
+  notes: NoteBlock[];
 }
 
 export interface SectionsMap {
