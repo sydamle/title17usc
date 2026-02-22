@@ -629,8 +629,8 @@ mark {
 
 /* Popup panel that appears below the clicked block */
 .para-popup {
-  background: #f0f5eb;
-  border: 1px solid #7a9e5c;
+  background: #f0f4fa;
+  border: 1px solid #5a82b4;
   border-radius: 4px;
   margin: 2px 0 10px 0;
   font-family: 'Arial', sans-serif;
@@ -642,7 +642,7 @@ mark {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #5a7a3a;
+  background: #1a4a7a;
   color: #fff;
   padding: 6px 12px;
   border-radius: 3px 3px 0 0;
@@ -684,7 +684,7 @@ mark {
 .para-popup-label {
   font-weight: 700;
   font-size: 11px;
-  color: #3a5a1a;
+  color: #1a4a7a;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   flex-shrink: 0;
