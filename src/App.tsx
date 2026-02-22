@@ -720,6 +720,13 @@ function SectionView({
                   const citation = `17 U.S.C. § 101 "${def.term}"`;
                   return (
                     <React.Fragment key={i}>
+                      {isActive && (
+                        <ParagraphPopup
+                          url={activePopup!.url}
+                          citation={activePopup!.citation}
+                          onClose={() => setActivePopup(null)}
+                        />
+                      )}
                       <p className={`sec101-def ${def.indentClass}`} id={popupId}>
                         <span dangerouslySetInnerHTML={{ __html: split.before }} />
                         <button
@@ -736,13 +743,6 @@ function SectionView({
                         </button>
                         <span dangerouslySetInnerHTML={{ __html: split.after }} />
                       </p>
-                      {isActive && (
-                        <ParagraphPopup
-                          url={activePopup!.url}
-                          citation={activePopup!.citation}
-                          onClose={() => setActivePopup(null)}
-                        />
-                      )}
                     </React.Fragment>
                   );
                 }
@@ -782,6 +782,13 @@ function SectionView({
 
                   return (
                     <React.Fragment key={i}>
+                      {isActive && (
+                        <ParagraphPopup
+                          url={activePopup!.url}
+                          citation={activePopup!.citation}
+                          onClose={() => setActivePopup(null)}
+                        />
+                      )}
                       <div className={className} id={meta.id}>
                         <button
                           className={`para-num-btn${isActive ? ' active' : ''}`}
@@ -797,13 +804,6 @@ function SectionView({
                         </button>
                         <span dangerouslySetInnerHTML={{ __html: split.restHtml }} />
                       </div>
-                      {isActive && (
-                        <ParagraphPopup
-                          url={activePopup!.url}
-                          citation={activePopup!.citation}
-                          onClose={() => setActivePopup(null)}
-                        />
-                      )}
                     </React.Fragment>
                   );
                 }
