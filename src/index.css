@@ -772,6 +772,7 @@ p.sec101-def.indent3 { padding-left: 84px; }
   color: #1b1b1b;
   max-width: 800px;
   padding-left: 12px;
+  padding-right: 12px;
 }
 
 .note-section {
