@@ -890,10 +890,6 @@ function ReportsPanel({ sourceCredit }: { sourceCredit: string }) {
 }
 
 // ======== Sections with curated legislative history ========
-const HISTORY_SECTIONS = new Set([
-  '101', '102', '106', '107', '108', '109', '110', '114', '115', '117', '512', '1201',
-]);
-
 // ======== History Panel ========
 
 function HistoryPanel({ entries }: { entries: LegHistoryEntry[] }) {
@@ -1050,7 +1046,6 @@ function SectionView({
   const [activePopup, setActivePopup] = useState<PopupState | null>(null);
   const [activeTab, setActiveTab] = useState<'text' | 'history' | 'notes'>('text');
   const [activeDefPopup, setActiveDefPopup] = useState<DefPopupState | null>(null);
-  const hasHistory = HISTORY_SECTIONS.has(sectionNum);
   const legHistory = useLegHistory(sectionNum);
 
   // Reset popup and tab when navigating to a different section
@@ -1297,16 +1292,6 @@ function SectionView({
           >
             Text
           </button>
-          {hasHistory && (
-            <button
-              role="tab"
-              aria-selected={activeTab === 'history'}
-              className={`section-tab${activeTab === 'history' ? ' active' : ''}`}
-              onClick={() => setActiveTab('history')}
-            >
-              History{'\u00a0'}(Beta)
-            </button>
-          )}
           {section.notes.length > 0 && (
             <button
               role="tab"
@@ -1317,17 +1302,25 @@ function SectionView({
               Notes
             </button>
           )}
+          <button
+            role="tab"
+            aria-selected={activeTab === 'history'}
+            className={`section-tab${activeTab === 'history' ? ' active' : ''}`}
+            onClick={() => setActiveTab('history')}
+          >
+            History{'\u00a0'}(Beta)
+          </button>
         </div>
 
         {activeTab === 'history' ? (
-          <HistoryPanel entries={legHistory} />
+          <>
+            <HistoryPanel entries={legHistory} />
+            {section.sourceCredit && <ReportsPanel sourceCredit={section.sourceCredit} />}
+          </>
         ) : null}
 
         {activeTab === 'notes' ? (
-          <>
-            <NotesPanel notes={section.notes} onNavigate={onNavigate} />
-            {section.sourceCredit && <ReportsPanel sourceCredit={section.sourceCredit} />}
-          </>
+          <NotesPanel notes={section.notes} onNavigate={onNavigate} />
         ) : null}
 
         <div
