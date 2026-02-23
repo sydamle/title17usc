@@ -131,6 +131,54 @@ function splitAtFirstTerm(
   return { before: html.slice(0, idx), after: html.slice(idx + target.length) };
 }
 
+// ======== § 101 Term Annotation ========
+// Builds a function that wraps occurrences of § 101 defined terms in text
+// nodes with <span class="def-term" data-slug="..."> for highlighting.
+
+function buildTermAnnotator(defs: Sec101Def[]): (html: string) => string {
+  const terms = defs
+    .filter((d): d is Sec101Def & { term: string; slug: string } => !!d.term && !!d.slug)
+    .sort((a, b) => b.term.length - a.term.length); // longest-first avoids partial matches
+  if (terms.length === 0) return html => html;
+
+  const slugByLower = new Map(terms.map(t => [t.term.toLowerCase(), t.slug]));
+  const pattern = terms
+    .map(t => {
+      const esc = t.term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      return esc.replace(/ /g, '\\s+');
+    })
+    .join('|');
+  const termRe = new RegExp(`\\b(${pattern})\\b`, 'gi');
+
+  return function annotate(html: string): string {
+    const parts = html.split(/(<[^>]+>)/g);
+    return parts
+      .map((part, i) => {
+        if (i % 2 === 1) return part; // HTML tag — leave unchanged
+        return part.replace(termRe, match => {
+          const slug = slugByLower.get(match.toLowerCase());
+          return slug
+            ? `<span class="def-term" data-slug="${slug}">${match}</span>`
+            : match;
+        });
+      })
+      .join('');
+  };
+}
+
+// Collect the full definition HTML for a slug: the indent1 paragraph plus
+// any following indent2/3 sub-paragraphs that belong to that definition.
+function getFullDefHtml(defs: Sec101Def[], slug: string): string {
+  const idx = defs.findIndex(d => d.slug === slug);
+  if (idx === -1) return '';
+  const parts: string[] = [];
+  for (let i = idx; i < defs.length; i++) {
+    if (i > idx && defs[i].indentClass === 'indent1') break;
+    parts.push(`<p class="def-popup-para ${defs[i].indentClass}">${defs[i].innerHtml}</p>`);
+  }
+  return parts.join('');
+}
+
 // ======== Paragraph Popup ========
 
 interface PopupState {
@@ -198,6 +246,75 @@ function ParagraphPopup({
             {citCopied ? '✓ Copied' : 'Copy'}
           </button>
         </div>
+      </div>
+    </div>
+  );
+}
+
+// ======== Definition Term Popup ========
+
+interface DefPopupState {
+  slug: string;
+  term: string;
+  defHtml: string;
+  x: number;
+  y: number;
+}
+
+function DefTermPopup({
+  popup,
+  onClose,
+  onNavigate,
+}: {
+  popup: DefPopupState;
+  onClose: () => void;
+  onNavigate: (v: ViewState) => void;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  // Close on outside click
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) onClose();
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [onClose]);
+
+  // Close on Escape
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
+    document.addEventListener('keydown', handler);
+    return () => document.removeEventListener('keydown', handler);
+  }, [onClose]);
+
+  const left = Math.max(8, Math.min(popup.x - 20, window.innerWidth - 508));
+  const top = popup.y + 16;
+
+  return (
+    <div
+      ref={ref}
+      className="def-popup"
+      style={{ position: 'fixed', left, top, zIndex: 300 }}
+      role="dialog"
+      aria-label={`Definition of ${popup.term}`}
+    >
+      <div className="def-popup-header">
+        <span>{'\u201c'}{popup.term}{'\u201d'}</span>
+        <span className="def-popup-tag">§ 101</span>
+        <button className="def-popup-close" onClick={onClose} aria-label="Close">×</button>
+      </div>
+      <div className="def-popup-body" dangerouslySetInnerHTML={{ __html: popup.defHtml }} />
+      <div className="def-popup-footer">
+        <button
+          className="def-popup-goto"
+          onClick={() => {
+            onNavigate({ type: 'section', sectionNum: '101', paragraphAnchor: `def/${popup.slug}` });
+            onClose();
+          }}
+        >
+          View full definition in § 101 →
+        </button>
       </div>
     </div>
   );
@@ -659,11 +776,13 @@ function SectionView({
   const sections = useSections();
   const [activePopup, setActivePopup] = useState<PopupState | null>(null);
   const [activeTab, setActiveTab] = useState<'text' | 'notes'>('text');
+  const [activeDefPopup, setActiveDefPopup] = useState<DefPopupState | null>(null);
 
   // Reset popup and tab when navigating to a different section
   useEffect(() => {
     setActivePopup(null);
     setActiveTab('text');
+    setActiveDefPopup(null);
   }, [sectionNum]);
 
   let chapter: TocChapter | undefined;
@@ -702,6 +821,41 @@ function SectionView({
         ? parseSec101Defs(section.content[0]?.html ?? '')
         : [],
     [section, sectionNum],
+  );
+
+  // For non-§101 sections: parse § 101 defs to power term highlighting
+  const defs101 = useMemo(
+    () =>
+      sectionNum !== '101' && sections?.['101']
+        ? parseSec101Defs(sections['101'].content[0]?.html ?? '')
+        : [],
+    [sections, sectionNum],
+  );
+  const annotateTerms = useMemo(() => buildTermAnnotator(defs101), [defs101]);
+
+  // Handle clicks on highlighted defined terms
+  const handleContentClick = useCallback(
+    (e: React.MouseEvent) => {
+      const span = (e.target as Element).closest('.def-term');
+      if (span) {
+        const slug = span.getAttribute('data-slug');
+        if (slug) {
+          const def = defs101.find(d => d.slug === slug);
+          if (def?.term) {
+            setActiveDefPopup({
+              slug,
+              term: def.term,
+              defHtml: getFullDefHtml(defs101, slug),
+              x: e.clientX,
+              y: e.clientY,
+            });
+            return;
+          }
+        }
+      }
+      handleUslmClick(e, onNavigate);
+    },
+    [defs101, onNavigate],
   );
 
   // Scroll to the paragraph/definition anchor once content is ready
@@ -757,6 +911,13 @@ function SectionView({
         chapter={chapter}
         section={tocSection}
       />
+      {activeDefPopup && (
+        <DefTermPopup
+          popup={activeDefPopup}
+          onClose={() => setActiveDefPopup(null)}
+          onNavigate={onNavigate}
+        />
+      )}
       <div className="section-view">
         <div className="section-nav-bar">
           <div className="section-nav-links">
@@ -843,7 +1004,7 @@ function SectionView({
         <div
           className="statutory-text"
           hidden={activeTab === 'notes'}
-          onClick={e => handleUslmClick(e, onNavigate)}
+          onClick={handleContentClick}
         >
           {section.content.length === 0 ? (
             <p style={{ color: '#767676', fontStyle: 'italic' }}>
@@ -946,7 +1107,7 @@ function SectionView({
                         >
                           {split.numText}
                         </button>
-                        <span dangerouslySetInnerHTML={{ __html: split.restHtml }} />
+                        <span dangerouslySetInnerHTML={{ __html: annotateTerms(split.restHtml) }} />
                       </div>
                     </React.Fragment>
                   );
@@ -958,7 +1119,7 @@ function SectionView({
                 <div
                   key={i}
                   className={className}
-                  dangerouslySetInnerHTML={{ __html: block.html }}
+                  dangerouslySetInnerHTML={{ __html: annotateTerms(block.html) }}
                 />
               );
             })
