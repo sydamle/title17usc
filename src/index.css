@@ -735,6 +735,106 @@ p.sec101-def.indent3 { padding-left: 84px; }
   color: #2e7d32;
 }
 
+/* ===== § 101 TERM HIGHLIGHTS ===== */
+
+/* Inline highlight for defined terms from § 101 appearing in other sections */
+.def-term {
+  background: #fffbe6;
+  border-bottom: 1px dotted #b8860b;
+  border-radius: 2px;
+  padding: 0 1px;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+.def-term:hover {
+  background: #fff0a0;
+  border-bottom-color: #8b6000;
+}
+
+/* ===== § 101 DEFINITION POPUP ===== */
+
+.def-popup {
+  background: #fff;
+  border: 1px solid #5a82b4;
+  border-radius: 6px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: max-content;
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 14px;
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;
+}
+
+.def-popup-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #1a4a7a;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 5px 5px 0 0;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.def-popup-tag {
+  font-size: 11px;
+  font-weight: 400;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 1px 7px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.def-popup-close {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 2px;
+  margin-left: auto;
+  opacity: 0.85;
+  transition: opacity 0.1s;
+  flex-shrink: 0;
+}
+.def-popup-close:hover { opacity: 1; }
+
+.def-popup-body {
+  padding: 12px 16px 8px;
+  line-height: 1.75;
+  color: #1a1a1a;
+}
+
+.def-popup-body p.def-popup-para {
+  margin: 0 0 4px 0;
+}
+.def-popup-body p.def-popup-para.indent0 { padding-left: 0; }
+.def-popup-body p.def-popup-para.indent1 { padding-left: 0; }
+.def-popup-body p.def-popup-para.indent2 { padding-left: 24px; }
+.def-popup-body p.def-popup-para.indent3 { padding-left: 48px; }
+
+.def-popup-footer {
+  padding: 8px 16px 10px;
+  border-top: 1px solid #e0e8f0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.def-popup-goto {
+  background: none;
+  border: none;
+  color: #005ea2;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  font-family: inherit;
+}
+.def-popup-goto:hover { color: #003d73; }
+
 /* Section tabs (Text / Notes) */
 .section-tabs {
   display: flex;
