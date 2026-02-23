@@ -131,17 +131,26 @@ function splitAtFirstTerm(
   return { before: html.slice(0, idx), after: html.slice(idx + target.length) };
 }
 
-// ======== § 101 Term Annotation ========
-// Builds a function that wraps occurrences of § 101 defined terms in text
-// nodes with <span class="def-term" data-slug="..."> for highlighting.
+// ======== Term Annotation ========
+// Annotates defined terms from §§ 101 and 115(e) in statutory text.
+// Uses a single-pass regex (terms sorted longest-first) so overlapping
+// definitions from different sources never double-wrap the same text.
 
-function buildTermAnnotator(defs: Sec101Def[]): (html: string) => string {
-  const terms = defs
-    .filter((d): d is Sec101Def & { term: string; slug: string } => !!d.term && !!d.slug)
+interface TermDef {
+  term: string;
+  slug: string;
+  source: string; // '101' | '115e'
+}
+
+function buildTermAnnotator(termDefs: TermDef[]): (html: string) => string {
+  const terms = termDefs
+    .filter(d => d.term && d.slug)
     .sort((a, b) => b.term.length - a.term.length); // longest-first avoids partial matches
   if (terms.length === 0) return html => html;
 
-  const slugByLower = new Map(terms.map(t => [t.term.toLowerCase(), t.slug]));
+  const infoByLower = new Map(
+    terms.map(t => [t.term.toLowerCase(), { slug: t.slug, source: t.source }]),
+  );
   const pattern = terms
     .map(t => {
       const esc = t.term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -156,9 +165,9 @@ function buildTermAnnotator(defs: Sec101Def[]): (html: string) => string {
       .map((part, i) => {
         if (i % 2 === 1) return part; // HTML tag — leave unchanged
         return part.replace(termRe, match => {
-          const slug = slugByLower.get(match.toLowerCase());
-          return slug
-            ? `<span class="def-term" data-slug="${slug}">${match}</span>`
+          const info = infoByLower.get(match.toLowerCase());
+          return info
+            ? `<span class="def-term" data-slug="${info.slug}" data-def-source="${info.source}">${match}</span>`
             : match;
         });
       })
@@ -166,8 +175,7 @@ function buildTermAnnotator(defs: Sec101Def[]): (html: string) => string {
   };
 }
 
-// Collect the full definition HTML for a slug: the indent1 paragraph plus
-// any following indent2/3 sub-paragraphs that belong to that definition.
+// Collect the full definition HTML for a § 101 slug.
 function getFullDefHtml(defs: Sec101Def[], slug: string): string {
   const idx = defs.findIndex(d => d.slug === slug);
   if (idx === -1) return '';
@@ -175,6 +183,60 @@ function getFullDefHtml(defs: Sec101Def[], slug: string): string {
   for (let i = idx; i < defs.length; i++) {
     if (i > idx && defs[i].indentClass === 'indent1') break;
     parts.push(`<p class="def-popup-para ${defs[i].indentClass}">${defs[i].innerHtml}</p>`);
+  }
+  return parts.join('');
+}
+
+// ======== § 115(e) Definition Helpers ========
+
+interface Sec115eDef {
+  blockIndex: number; // index in section.content of the top-level definition block
+  term: string;
+  slug: string;
+  anchor: string; // paragraph anchor for navigation, e.g. "(e)(1)"
+  indent: number; // indent level of the definition block (2 for § 115(e))
+}
+
+// Parse the definitions from subsection (e) of § 115 out of the section's
+// content block array.  Each indent=2 paragraph inside subsection (e) that
+// carries a curly-quoted term becomes a Sec115eDef.
+function parseSec115eDefs(content: ContentBlock[]): Sec115eDef[] {
+  const defs: Sec115eDef[] = [];
+  let inE = false;
+  for (let i = 0; i < content.length; i++) {
+    const block = content[i];
+    if (block.type === 'subsection' && /class="num">\(e\)/.test(block.html)) {
+      inE = true;
+      continue;
+    }
+    if (inE && block.type === 'subsection' && block.indent <= 1) break; // next subsection
+    if (!inE) continue;
+
+    if (block.indent === 2) {
+      const termMatch = block.html.match(/\u201c([^\u201d]+)\u201d/);
+      if (termMatch) {
+        const term = termMatch[1];
+        const slug = term.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+        const numMatch = block.html.match(/^<span class="num">([^<]+)<\/span>/);
+        const designator = numMatch ? numMatch[1].trim() : '';
+        defs.push({ blockIndex: i, term, slug, anchor: `(e)${designator}`, indent: 2 });
+      }
+    }
+  }
+  return defs;
+}
+
+// Build the popup HTML for a § 115(e) definition: the top-level block plus
+// any deeper-indent sub-blocks that belong to it.
+function getSec115eDefHtml(content: ContentBlock[], def: Sec115eDef): string {
+  const parts: string[] = [];
+  for (let i = def.blockIndex; i < content.length; i++) {
+    const block = content[i];
+    if (i > def.blockIndex && block.indent <= def.indent) break;
+    const relPad = (block.indent - def.indent) * 24;
+    parts.push(
+      `<div class="def-popup-block" style="padding-left:${relPad}px">${block.html}</div>`,
+    );
   }
   return parts.join('');
 }
@@ -257,6 +319,8 @@ interface DefPopupState {
   slug: string;
   term: string;
   defHtml: string;
+  label: string;       // e.g. "§\u202f101" or "§\u202f115(e)"
+  navTarget: ViewState;
   x: number;
   y: number;
 }
@@ -301,19 +365,16 @@ function DefTermPopup({
     >
       <div className="def-popup-header">
         <span>{'\u201c'}{popup.term}{'\u201d'}</span>
-        <span className="def-popup-tag">§ 101</span>
+        <span className="def-popup-tag">{popup.label}</span>
         <button className="def-popup-close" onClick={onClose} aria-label="Close">×</button>
       </div>
       <div className="def-popup-body" dangerouslySetInnerHTML={{ __html: popup.defHtml }} />
       <div className="def-popup-footer">
         <button
           className="def-popup-goto"
-          onClick={() => {
-            onNavigate({ type: 'section', sectionNum: '101', paragraphAnchor: `def/${popup.slug}` });
-            onClose();
-          }}
+          onClick={() => { onNavigate(popup.navTarget); onClose(); }}
         >
-          View full definition in § 101 →
+          View full definition in {popup.label} →
         </button>
       </div>
     </div>
@@ -831,7 +892,25 @@ function SectionView({
         : [],
     [sections, sectionNum],
   );
-  const annotateTerms = useMemo(() => buildTermAnnotator(defs101), [defs101]);
+
+  // For § 115: also parse subsection (e) inline definitions
+  const sec115eDefs = useMemo(
+    () => sectionNum === '115' && section ? parseSec115eDefs(section.content) : [],
+    [section, sectionNum],
+  );
+
+  // Build a single combined annotator (longest-first across both sources)
+  // so § 115(e) terms and § 101 terms never double-wrap the same span.
+  const annotateTerms = useMemo(() => {
+    const termDefs: TermDef[] = [];
+    for (const d of defs101) {
+      if (d.term && d.slug) termDefs.push({ term: d.term, slug: d.slug, source: '101' });
+    }
+    for (const d of sec115eDefs) {
+      termDefs.push({ term: d.term, slug: d.slug, source: '115e' });
+    }
+    return buildTermAnnotator(termDefs);
+  }, [defs101, sec115eDefs]);
 
   // Handle clicks on highlighted defined terms
   const handleContentClick = useCallback(
@@ -839,23 +918,42 @@ function SectionView({
       const span = (e.target as Element).closest('.def-term');
       if (span) {
         const slug = span.getAttribute('data-slug');
+        const defSource = span.getAttribute('data-def-source');
         if (slug) {
-          const def = defs101.find(d => d.slug === slug);
-          if (def?.term) {
-            setActiveDefPopup({
-              slug,
-              term: def.term,
-              defHtml: getFullDefHtml(defs101, slug),
-              x: e.clientX,
-              y: e.clientY,
-            });
-            return;
+          if (defSource === '115e') {
+            const def = sec115eDefs.find(d => d.slug === slug);
+            if (def) {
+              setActiveDefPopup({
+                slug,
+                term: def.term,
+                defHtml: getSec115eDefHtml(section!.content, def),
+                label: '\u00a7\u202f115(e)',
+                navTarget: { type: 'section', sectionNum: '115', paragraphAnchor: def.anchor },
+                x: e.clientX,
+                y: e.clientY,
+              });
+              return;
+            }
+          } else {
+            const def = defs101.find(d => d.slug === slug);
+            if (def?.term) {
+              setActiveDefPopup({
+                slug,
+                term: def.term,
+                defHtml: getFullDefHtml(defs101, slug),
+                label: '\u00a7\u202f101',
+                navTarget: { type: 'section', sectionNum: '101', paragraphAnchor: `def/${slug}` },
+                x: e.clientX,
+                y: e.clientY,
+              });
+              return;
+            }
           }
         }
       }
       handleUslmClick(e, onNavigate);
     },
-    [defs101, onNavigate],
+    [defs101, sec115eDefs, section, onNavigate],
   );
 
   // Scroll to the paragraph/definition anchor once content is ready

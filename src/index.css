@@ -816,6 +816,19 @@ p.sec101-def.indent3 { padding-left: 84px; }
 .def-popup-body p.def-popup-para.indent2 { padding-left: 24px; }
 .def-popup-body p.def-popup-para.indent3 { padding-left: 48px; }
 
+/* § 115(e) block-based definition entries */
+.def-popup-block {
+  margin: 0 0 4px 0;
+  line-height: 1.75;
+}
+.def-popup-block .num {
+  font-weight: 400;
+  margin-right: 4px;
+}
+.def-popup-block .enum-heading {
+  font-weight: 700;
+}
+
 .def-popup-footer {
   padding: 8px 16px 10px;
   border-top: 1px solid #e0e8f0;
