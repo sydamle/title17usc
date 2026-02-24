@@ -969,7 +969,10 @@ function SectionView({
       : `p-${sectionNum}${paragraphAnchor}`;
     const timer = setTimeout(() => {
       const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (el) {
+        const y = el.getBoundingClientRect().top + window.scrollY - 76;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
     }, 100);
     return () => clearTimeout(timer);
   }, [section, sectionNum, paragraphAnchor]);
