@@ -5,19 +5,6 @@ import tocJsonImport from './data/toc.json';
 // TOC is small (32KB) — import directly for instant sidebar render
 const tocData = tocJsonImport as TocData;
 
-// ======== Data types ========
-
-export interface LegHistoryEntry {
-  citation: string;       // "H.R. Rep. No. 94-1476"
-  shortTitle: string;     // brief description of the report
-  congress: number;
-  year: number;
-  publaw: string;         // "94-553" — the enacting public law
-  govinfoPkg: string;     // govinfo.gov package ID, e.g. "CRPT-94hrpt1476"
-  pages?: string;         // page range in the report
-  html: string;           // HTML excerpt
-}
-
 // ======== Data fetching ========
 
 let sectionsCache: SectionsMap | null = null;
@@ -45,31 +32,7 @@ function useSections(): SectionsMap | null {
   return sections;
 }
 
-type LegHistoryMap = Record<string, LegHistoryEntry[]>;
-let legHistoryCache: LegHistoryMap | null = null;
-let legHistoryPromise: Promise<LegHistoryMap> | null = null;
-
-function fetchLegHistory(): Promise<LegHistoryMap> {
-  if (legHistoryCache) return Promise.resolve(legHistoryCache);
-  if (legHistoryPromise) return legHistoryPromise;
-  legHistoryPromise = fetch('./data/leg-history.json')
-    .then(r => r.json())
-    .then((data: LegHistoryMap) => {
-      legHistoryCache = data;
-      return data;
-    });
-  return legHistoryPromise;
-}
-
-function useLegHistory(sectionNum: string): LegHistoryEntry[] {
-  const [entries, setEntries] = useState<LegHistoryEntry[]>(
-    legHistoryCache?.[sectionNum] ?? [],
-  );
-  useEffect(() => {
-    fetchLegHistory().then(data => setEntries(data[sectionNum] ?? []));
-  }, [sectionNum]);
-  return entries;
-}
+// (Legislative history data fetching removed)
 
 // ======== Utility ========
 
@@ -768,178 +731,6 @@ const TOPIC_HEADING: Record<string, string> = {
   executiveOrder: 'Executive Order',
 };
 
-// ======== Pub. L. → Committee Reports mapping ========
-// Maps "congress-lawnum" keys (e.g. "94-553") to the committee reports
-// associated with that public law.  govinfoPkg is the govinfo.gov package ID
-// used to build the details-page URL.
-
-interface ReportRef {
-  citation: string;   // "H.R. Rep. No. 94-1476"
-  body: string;       // "House" | "Senate" | "Conference"
-  govinfoPkg: string; // "CRPT-94hrpt1476"
-}
-
-const PUB_LAW_REPORTS: Record<string, ReportRef[]> = {
-  '94-553': [   // Copyright Act of 1976
-    { citation: 'H.R. Rep. No. 94-1476', body: 'House',      govinfoPkg: 'CRPT-94hrpt1476' },
-    { citation: 'S. Rep. No. 94-473',    body: 'Senate',     govinfoPkg: 'CRPT-94srpt473'  },
-    { citation: 'H.R. Rep. No. 94-1733', body: 'Conference', govinfoPkg: 'CRPT-94hrpt1733' },
-  ],
-  '96-517': [   // Computer Software Copyright Act of 1980
-    { citation: 'H.R. Rep. No. 96-1307', body: 'House', govinfoPkg: 'CRPT-96hrpt1307' },
-  ],
-  '100-568': [  // Berne Convention Implementation Act of 1988
-    { citation: 'H.R. Rep. No. 100-609', body: 'House',  govinfoPkg: 'CRPT-100hrpt609' },
-    { citation: 'S. Rep. No. 100-352',   body: 'Senate', govinfoPkg: 'CRPT-100srpt352'  },
-  ],
-  '101-650': [  // Judicial Improvements Act of 1990 (incl. VARA, Architectural Works)
-    { citation: 'H.R. Rep. No. 101-735', body: 'House', govinfoPkg: 'CRPT-101hrpt735' },
-  ],
-  '102-307': [  // Copyright Amendments Act of 1992 (renewal)
-    { citation: 'H.R. Rep. No. 102-379', body: 'House', govinfoPkg: 'CRPT-102hrpt379' },
-  ],
-  '102-563': [  // Audio Home Recording Act of 1992
-    { citation: 'S. Rep. No. 102-294',   body: 'Senate', govinfoPkg: 'CRPT-102srpt294'  },
-    { citation: 'H.R. Rep. No. 102-873', body: 'House',  govinfoPkg: 'CRPT-102hrpt873' },
-  ],
-  '103-465': [  // Uruguay Round Agreements Act (§ 104A restored works)
-    { citation: 'H.R. Rep. No. 103-826', body: 'House', govinfoPkg: 'CRPT-103hrpt826' },
-  ],
-  '104-39': [   // Digital Performance Right in Sound Recordings Act of 1995
-    { citation: 'S. Rep. No. 104-128', body: 'Senate', govinfoPkg: 'CRPT-104srpt128' },
-  ],
-  '105-80': [   // No Electronic Theft Act of 1997
-    { citation: 'H.R. Rep. No. 105-339', body: 'House', govinfoPkg: 'CRPT-105hrpt339' },
-  ],
-  '105-298': [  // Sonny Bono Copyright Term Extension Act
-    { citation: 'H.R. Rep. No. 105-452', body: 'House', govinfoPkg: 'CRPT-105hrpt452' },
-  ],
-  '105-304': [  // Digital Millennium Copyright Act (DMCA)
-    { citation: 'H.R. Rep. No. 105-551 (Pt.\u00a01)', body: 'House',      govinfoPkg: 'CRPT-105hrpt551pt1' },
-    { citation: 'H.R. Rep. No. 105-551 (Pt.\u00a02)', body: 'House',      govinfoPkg: 'CRPT-105hrpt551pt2' },
-    { citation: 'S. Rep. No. 105-190',               body: 'Senate',     govinfoPkg: 'CRPT-105srpt190'    },
-    { citation: 'H.R. Rep. No. 105-796',             body: 'Conference', govinfoPkg: 'CRPT-105hrpt796'    },
-  ],
-  '107-273': [  // 21st Century Department of Justice Appropriations Act (TEACH Act, § 13301)
-    { citation: 'H.R. Rep. No. 107-687', body: 'House', govinfoPkg: 'CRPT-107hrpt687' },
-  ],
-  '108-419': [  // Copyright Royalty and Distribution Reform Act of 2004
-    { citation: 'S. Rep. No. 108-144', body: 'Senate', govinfoPkg: 'CRPT-108srpt144' },
-  ],
-  '110-403': [  // PRO-IP Act of 2008
-    { citation: 'H.R. Rep. No. 110-617', body: 'House', govinfoPkg: 'CRPT-110hrpt617' },
-  ],
-  '111-295': [  // Copyright Cleanup, Clarification, and Corrections Act of 2010
-    { citation: 'H.R. Rep. No. 111-669', body: 'House', govinfoPkg: 'CRPT-111hrpt669' },
-  ],
-  '115-264': [  // Music Modernization Act
-    { citation: 'H.R. Rep. No. 115-651', body: 'House',  govinfoPkg: 'CRPT-115hrpt651' },
-    { citation: 'S. Rep. No. 115-339',   body: 'Senate', govinfoPkg: 'CRPT-115srpt339' },
-  ],
-  '116-260': [  // Consolidated Appropriations Act, 2021 (CASE Act — Div. Q)
-    { citation: 'H.R. Rep. No. 116-252', body: 'House', govinfoPkg: 'CRPT-116hrpt252' },
-  ],
-};
-
-// Parse all "Congress-LawNum" pairs out of a sourceCredit string.
-// sourceCredit uses en-dashes (–), not hyphens.
-function extractPubLaws(sourceCredit: string): string[] {
-  const seen = new Set<string>();
-  const re = /Pub\.\s*L\.\s*(\d+)[–\-](\d+)/g;
-  let m: RegExpExecArray | null;
-  while ((m = re.exec(sourceCredit)) !== null) {
-    seen.add(`${m[1]}-${m[2]}`);
-  }
-  return [...seen];
-}
-
-// Return all ReportRef entries relevant to a sourceCredit string.
-function reportsForSourceCredit(sourceCredit: string): ReportRef[] {
-  return extractPubLaws(sourceCredit).flatMap(pl => PUB_LAW_REPORTS[pl] ?? []);
-}
-
-// ======== Reports Panel (Notes tab footer) ========
-
-function ReportsPanel({ sourceCredit }: { sourceCredit: string }) {
-  const reports = useMemo(() => reportsForSourceCredit(sourceCredit), [sourceCredit]);
-  if (reports.length === 0) return null;
-  return (
-    <div className="reports-panel">
-      <h3 className="reports-panel-heading">Committee Reports</h3>
-      <ul className="reports-panel-list">
-        {reports.map((r, i) => (
-          <li key={i} className="reports-panel-item">
-            <a
-              href={`https://www.govinfo.gov/app/details/${r.govinfoPkg}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="reports-panel-link"
-            >
-              {r.citation}
-            </a>
-            <span className="reports-panel-body">{r.body}</span>
-          </li>
-        ))}
-      </ul>
-      <p className="reports-panel-note">
-        Links open the govinfo.gov details page for each report, which provides
-        access to PDF and HTML versions.
-      </p>
-    </div>
-  );
-}
-
-// ======== Sections with curated legislative history ========
-const HISTORY_SECTIONS = new Set([
-  '101', '102', '106', '107', '108', '109', '110', '114', '115', '117', '512', '1201',
-]);
-
-// ======== History Panel ========
-
-function HistoryPanel({ entries }: { entries: LegHistoryEntry[] }) {
-  if (entries.length === 0) {
-    return (
-      <div className="history-panel">
-        <p className="history-empty">No curated legislative history available for this section.</p>
-      </div>
-    );
-  }
-  return (
-    <div className="history-panel">
-      {entries.map((entry, i) => (
-        <div key={i} className="history-entry">
-          <div className="history-entry-header">
-            <div className="history-entry-meta">
-              <span className="history-entry-citation">{entry.citation}</span>
-              {entry.pages && (
-                <span className="history-entry-pages">pp.\u00a0{entry.pages}</span>
-              )}
-              <span className="history-entry-year">({entry.year})</span>
-            </div>
-            <div className="history-entry-title">{entry.shortTitle}</div>
-            <a
-              href={`https://www.govinfo.gov/app/details/${entry.govinfoPkg}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="history-entry-govinfo"
-            >
-              Full report on govinfo.gov ↗
-            </a>
-          </div>
-          <div
-            className="history-entry-body"
-            dangerouslySetInnerHTML={{ __html: entry.html }}
-          />
-        </div>
-      ))}
-      <p className="history-disclaimer">
-        Excerpts are drawn from publicly available committee reports and are provided for
-        research purposes. Report text is in the public domain. Page citations refer to
-        the printed committee report; pagination may vary across reprinted versions.
-      </p>
-    </div>
-  );
-}
 
 // ======== USLM link resolver ========
 // Converts USLM identifiers (e.g. /us/pl/106/113, /us/usc/t17/s101) to real
@@ -1048,10 +839,8 @@ function SectionView({
 }) {
   const sections = useSections();
   const [activePopup, setActivePopup] = useState<PopupState | null>(null);
-  const [activeTab, setActiveTab] = useState<'text' | 'history' | 'notes'>('text');
+  const [activeTab, setActiveTab] = useState<'text' | 'notes'>('text');
   const [activeDefPopup, setActiveDefPopup] = useState<DefPopupState | null>(null);
-  const hasHistory = HISTORY_SECTIONS.has(sectionNum);
-  const legHistory = useLegHistory(sectionNum);
 
   // Reset popup and tab when navigating to a different section
   useEffect(() => {
@@ -1297,16 +1086,6 @@ function SectionView({
           >
             Text
           </button>
-          {hasHistory && (
-            <button
-              role="tab"
-              aria-selected={activeTab === 'history'}
-              className={`section-tab${activeTab === 'history' ? ' active' : ''}`}
-              onClick={() => setActiveTab('history')}
-            >
-              History{'\u00a0'}(Beta)
-            </button>
-          )}
           {section.notes.length > 0 && (
             <button
               role="tab"
@@ -1319,15 +1098,8 @@ function SectionView({
           )}
         </div>
 
-        {activeTab === 'history' ? (
-          <HistoryPanel entries={legHistory} />
-        ) : null}
-
         {activeTab === 'notes' ? (
-          <>
-            <NotesPanel notes={section.notes} onNavigate={onNavigate} />
-            {section.sourceCredit && <ReportsPanel sourceCredit={section.sourceCredit} />}
-          </>
+          <NotesPanel notes={section.notes} onNavigate={onNavigate} />
         ) : null}
 
         <div
