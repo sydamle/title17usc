@@ -182,7 +182,8 @@ def _visit_structural(el, blocks, depth, el_type):
 
     if chapeau_el is not None:
         body_html = _container_to_html(chapeau_el)
-        intro_html = f'{num_html} {heading_html}{body_html}'.strip()
+        heading_sep = ' ' if heading_html and body_html else ''
+        intro_html = f'{num_html} {heading_html}{heading_sep}{body_html}'.strip()
         if intro_html:
             blocks.append({'type': el_type, 'indent': indent, 'html': intro_html})
         # Recurse into children (structural sub-elements only)
@@ -199,7 +200,8 @@ def _visit_structural(el, blocks, depth, el_type):
 
     elif content_el is not None:
         body_html = _container_to_html(content_el)
-        intro_html = f'{num_html} {heading_html}{body_html}'.strip()
+        heading_sep = ' ' if heading_html and body_html else ''
+        intro_html = f'{num_html} {heading_html}{heading_sep}{body_html}'.strip()
         if intro_html:
             blocks.append({'type': el_type, 'indent': indent, 'html': intro_html})
         # Recurse into structural children (there shouldn't be any if content_el is set,
@@ -230,7 +232,8 @@ def _visit_structural(el, blocks, depth, el_type):
 
         if inline_parts:
             body_html = ''.join(inline_parts)
-            intro_html = f'{num_html} {heading_html}{body_html}'.strip()
+            heading_sep = ' ' if heading_html and body_html else ''
+            intro_html = f'{num_html} {heading_html}{heading_sep}{body_html}'.strip()
             blocks.append({'type': el_type, 'indent': indent, 'html': intro_html})
         elif header_html:
             blocks.append({'type': el_type, 'indent': indent, 'html': header_html})
